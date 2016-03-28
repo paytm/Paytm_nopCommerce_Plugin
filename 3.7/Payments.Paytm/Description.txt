@@ -1,0 +1,8 @@
+Group: Payment methods
+FriendlyName: Paytm
+SystemName: Payments.Paytm
+Version: 1.0
+SupportedVersions: 3.70
+Author: Paytm team
+DisplayOrder: 1
+FileName: Nop.Plugin.Payments.Paytm.dll
