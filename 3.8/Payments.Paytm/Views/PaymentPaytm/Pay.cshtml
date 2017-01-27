@@ -1,0 +1,22 @@
+﻿@{
+    Layout = "";
+}
+@model PayModel
+@using Nop.Plugin.Payments.Paytm.Models;
+@using Nop.Web.Framework;
+@using (Html.BeginForm())
+{      
+    <div>
+       <div class="editor-field">
+           Paytm Txn Failure Reason   : @Html.ValueFor(model => model.RespMsg)
+           <br />
+           Paytm Txn Failure Code     : @Html.ValueFor(model => model.RespCode)
+           <br />
+           Paytm Txn Failure Order Id : @Html.ValueFor(model => model.OrderId)
+          <br />      
+      </div>
+    </div>
+        <div>
+            @Html.ActionLink("Click here to continue..", "Index", "Home",null, new { title = "Go To Home Page..!!" })
+    </div>
+}
