@@ -1,0 +1,26 @@
+C:\Users\mayank1.gupta\Desktop\New folder\Nop.Plugin.Payments.Paytm\obj\Release\Nop.Plugin.Payments.Paytm.csprojResolveAssemblyReference.cache
+C:\Users\mayank1.gupta\Downloads\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\bin\Release\Views\PaymentPaytm\Configure.cshtml
+C:\Users\mayank1.gupta\Downloads\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\bin\Release\Views\PaymentPaytm\PaymentInfo.cshtml
+C:\Users\mayank1.gupta\Downloads\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\bin\Release\web.config
+C:\Users\mayank1.gupta\Downloads\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\bin\Release\Views\PaymentPaytm\Pay.cshtml
+C:\Users\mayank1.gupta\Downloads\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\bin\Release\Description.txt
+C:\Users\mayank1.gupta\Downloads\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\bin\Release\logo.jpg
+C:\Users\mayank1.gupta\Downloads\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\bin\Release\Nop.Plugin.Payments.Paytm.dll.config
+C:\Users\mayank1.gupta\Downloads\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\bin\Release\Nop.Plugin.Payments.Paytm.dll
+C:\Users\mayank1.gupta\Downloads\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\bin\Release\Nop.Plugin.Payments.Paytm.pdb
+C:\Users\mayank1.gupta\Downloads\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\bin\Release\Nop.Admin.dll
+C:\Users\mayank1.gupta\Downloads\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\bin\Release\Nop.Web.dll
+C:\Users\mayank1.gupta\Downloads\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\bin\Release\AutoMapper.dll
+C:\Users\mayank1.gupta\Downloads\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\bin\Release\FluentValidation.Mvc.dll
+C:\Users\mayank1.gupta\Downloads\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\bin\Release\MiniProfiler.Mvc.dll
+C:\Users\mayank1.gupta\Downloads\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\bin\Release\MiniProfiler.dll
+C:\Users\mayank1.gupta\Downloads\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\bin\Release\Nop.Admin.pdb
+C:\Users\mayank1.gupta\Downloads\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\bin\Release\Nop.Web.pdb
+C:\Users\mayank1.gupta\Downloads\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\bin\Release\AutoMapper.xml
+C:\Users\mayank1.gupta\Downloads\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\bin\Release\FluentValidation.Mvc.pdb
+C:\Users\mayank1.gupta\Downloads\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\bin\Release\MiniProfiler.Mvc.pdb
+C:\Users\mayank1.gupta\Downloads\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\bin\Release\MiniProfiler.pdb
+C:\Users\mayank1.gupta\Downloads\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\bin\Release\MiniProfiler.xml
+C:\Users\mayank1.gupta\Downloads\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\obj\Release\Nop.Plugin.Payments.Paytm.csprojResolveAssemblyReference.cache
+C:\Users\mayank1.gupta\Downloads\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\obj\Release\Nop.Plugin.Payments.Paytm.dll
+C:\Users\mayank1.gupta\Downloads\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\obj\Release\Nop.Plugin.Payments.Paytm.pdb
