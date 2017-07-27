@@ -184,7 +184,7 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
                 else if (AuthDesc == "TXN_FAILURE")
                 {
                     var p = new PayModel();
-                    p.RespMsg = parameters["RESMSG"].ToString();
+                    p.RespMsg = parameters["RESPMSG"].ToString();
                     return View("~/Plugins/Payments.Paytm/Views/PaymentPaytm/Pay.cshtml", p);
                     //Response.Write("<script> $(document).ready(function(){  $(\"#submitButton\").on(\"click\",function() {alert('"+parameters["RESPMSG"].ToString()+"');});});<script>");
                     //alert('@TempData["alertMessage"]');
@@ -285,7 +285,7 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
         private bool TxnStatus(string OrderId, String amount)
         {
             String uri = "https://pguat.paytm.com/oltp/HANDLER_INTERNAL/getTxnStatus";
-            if (_PaytmPaymentSettings.CallBackUrl.ToLower().Contains("secure.paytm.in"))
+            if (_PaytmPaymentSettings.PaymentUrl.ToLower().Contains("secure.paytm.in"))
             {
                 uri = "https://secure.paytm.in/oltp/HANDLER_INTERNAL/getTxnStatus";
             }
