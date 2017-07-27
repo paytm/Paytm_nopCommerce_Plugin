@@ -3,6 +3,6 @@ FriendlyName: Paytm
 SystemName: Payments.Paytm
 Version: 1.0
 SupportedVersions: 3.80
-Author: Mayank Gupta
+Author: Paytm team
 DisplayOrder: 1
 FileName: Nop.Plugin.Payments.Paytm.dll

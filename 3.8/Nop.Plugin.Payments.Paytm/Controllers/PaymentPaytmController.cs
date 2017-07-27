@@ -10,7 +10,9 @@ using Nop.Services.Payments;
 using Nop.Web.Framework.Controllers;
 using paytm;
 using System.Collections.Specialized;
-using Nop.Services.Localization;
+using System.IO;
+using System.Net;
+using System.Web;
 
 namespace Nop.Plugin.Payments.Paytm.Controllers
 {
@@ -22,13 +24,11 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
         private readonly IOrderProcessingService _orderProcessingService;
         private readonly PaytmPaymentSettings _PaytmPaymentSettings;
         private readonly PaymentSettings _paymentSettings;
-        private readonly ILocalizationService _localizationService;
-
+       
 
         public PaymentPaytmController(ISettingService settingService,
             IPaymentService paymentService, IOrderService orderService,
             IOrderProcessingService orderProcessingService,
-            ILocalizationService localizationService,
             PaytmPaymentSettings PaytmPaymentSettings,
             PaymentSettings paymentSettings)
         {
@@ -37,7 +37,6 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
             this._orderService = orderService;
             this._orderProcessingService = orderProcessingService;
             this._PaytmPaymentSettings = PaytmPaymentSettings;
-            this._localizationService = localizationService;
             this._paymentSettings = paymentSettings;
         }
 
@@ -71,7 +70,6 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
 			_PaytmPaymentSettings.PaymentUrl = model.PaymentUrl;
 			_PaytmPaymentSettings.CallBackUrl = model.CallBackUrl;
             _settingService.SaveSetting(_PaytmPaymentSettings);
-            SuccessNotification(_localizationService.GetResource("Admin.Plugins.Saved"));
 
             return Configure();
         }
@@ -104,7 +102,7 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
             if (processor == null ||
                 !processor.IsPaymentMethodActive(_paymentSettings) || !processor.PluginDescriptor.Installed)
                 throw new NopException("Paytm module cannot be loaded");
-
+            
 
             var myUtility = new PaytmHelper();
 			string orderId,  Amount, AuthDesc, ResCode;
@@ -114,30 +112,52 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
                 throw new NopException("Paytm key is not set");
 
 			string workingKey = _PaytmPaymentSettings.MerchantKey;
-        
+            string paytmChecksum = null;
 
-			Dictionary<string, string> parameters = new Dictionary<string, string>();
-			if (Request.Form.AllKeys.Length > 0)
-			{
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
 
-				string paytmChecksum="";
-				foreach (string key in Request.Form.Keys){
-					parameters.Add(key.Trim(), Request.Form[key].Trim());
-				}
+            if (Request.Form.AllKeys.Length > 0)
+            {
+                
+                foreach (string key in Request.Form.Keys)
+                {
+                    if (Request.Form[key].Contains("|"))
+                    {
+                        parameters.Add(key.Trim(), "");
+                    }
+                    else
+                    {
+                        parameters.Add(key.Trim(), Request.Form[key].Trim());
+                    }
+                }
 
-				if(parameters.ContainsKey("CHECKSUMHASH")){
-					paytmChecksum = parameters["CHECKSUMHASH"];
-					parameters.Remove("CHECKSUMHASH");
-				}
+                if (parameters.ContainsKey("CHECKSUMHASH"))
+                {
+                    paytmChecksum = parameters["CHECKSUMHASH"];
+                    parameters.Remove("CHECKSUMHASH");
+                }
+                if (!string.IsNullOrEmpty(paytmChecksum) && CheckSum.verifyCheckSum(workingKey, parameters, paytmChecksum))
+                {
+                    checkSumMatch = true;
+                }
+                    /*
+                    string paytmChecksum="";
+                    foreach (string key in Request.Form.Keys){
+                        parameters.Add(key.Trim(), Request.Form[key].Trim());
+                    }
 
-				if (CheckSum.verifyCheckSum(workingKey, parameters, paytmChecksum))	{
-					checkSumMatch = true;
+                    if(parameters.ContainsKey("CHECKSUMHASH")){
+                        paytmChecksum = parameters["CHECKSUMHASH"];
+                        parameters.Remove("CHECKSUMHASH");
+                    }
 
-				}
+                    if (CheckSum.verifyCheckSum(workingKey, parameters, paytmChecksum))	{
+                        checkSumMatch = true;
 
-			}
+                    }*/
+                }
 
-			orderId = parameters["ORDERID"];
+            orderId = parameters["ORDERID"];
 			Amount = parameters["TXNAMOUNT"];
 			ResCode = parameters["RESPCODE"];
 			AuthDesc = parameters["STATUS"];
@@ -145,20 +165,26 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
             if (checkSumMatch == true)
             {
                 var order = _orderService.GetOrderById(Convert.ToInt32(orderId));
+                
                 if (ResCode == "01" && AuthDesc == "TXN_SUCCESS")
                 {
-                    if (_orderProcessingService.CanMarkOrderAsPaid(order))
+                    if (TxnStatus(orderId, order.OrderTotal.ToString("#.##")))
                     {
-                        _orderProcessingService.MarkOrderAsPaid(order);
+                        if (_orderProcessingService.CanMarkOrderAsPaid(order))
+                        {
+                            _orderProcessingService.MarkOrderAsPaid(order);
+                        }
+                        return RedirectToRoute("CheckoutCompleted", new { orderId = order.Id });
                     }
-                    return RedirectToRoute("CheckoutCompleted", new { orderId = order.Id });
+                    else
+                    {
+                        return Content("Amount Mismatch");
+                    }
                 }
                 else if (AuthDesc == "TXN_FAILURE")
                 {
                     var p = new PayModel();
                     p.RespMsg = parameters["RESPMSG"].ToString();
-                    p.RespCode = parameters["RESPCODE"].ToString();
-                    p.OrderId = parameters["ORDERID"].ToString();
                     return View("~/Plugins/Payments.Paytm/Views/PaymentPaytm/Pay.cshtml", p);
                     //Response.Write("<script> $(document).ready(function(){  $(\"#submitButton\").on(\"click\",function() {alert('"+parameters["RESPMSG"].ToString()+"');});});<script>");
                     //alert('@TempData["alertMessage"]');
@@ -172,6 +198,12 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
                 {
                     return Content("Security Error. Illegal access detected");
                 }
+            }
+            else if (string.IsNullOrEmpty(paytmChecksum))
+            {
+                var p = new PayModel();
+                p.RespMsg = parameters["RESPMSG"].ToString();
+                return View("~/Plugins/Payments.Paytm/Views/PaymentPaytm/Pay.cshtml", p);
             }
             else
             {
@@ -249,5 +281,54 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
                 return Content("Security Error. Illegal access detected, Checksum failed");
             }
         }*/
+
+        private bool TxnStatus(string OrderId, String amount)
+        {
+            String uri = "https://pguat.paytm.com/oltp/HANDLER_INTERNAL/getTxnStatus";
+            if (_PaytmPaymentSettings.PaymentUrl.ToLower().Contains("secure.paytm.in"))
+            {
+                uri = "https://secure.paytm.in/oltp/HANDLER_INTERNAL/getTxnStatus";
+            }
+
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+
+            parameters.Add("MID", _PaytmPaymentSettings.MerchantId);
+            parameters.Add("ORDERID", OrderId);
+
+            string checksum = CheckSum.generateCheckSum(_PaytmPaymentSettings.MerchantKey, parameters);//.Replace("+", "%2B");
+            
+            try
+            {
+                string postData = "{\"MID\":\""+ _PaytmPaymentSettings.MerchantId+ "\",\"ORDERID\":\""+OrderId+"\",\"CHECKSUMHASH\":\""+ HttpUtility.UrlEncode(checksum) + "\"}";
+                
+                HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(uri);
+                webRequest.Method = "POST";
+                webRequest.Accept = "application/json";
+                webRequest.ContentType = "application/json";
+
+                using (StreamWriter requestWriter2 = new StreamWriter(webRequest.GetRequestStream()))
+                {
+                    requestWriter2.Write("JsonData=" + postData);
+                }
+                string responseData = string.Empty;
+                using (StreamReader responseReader = new StreamReader(webRequest.GetResponse().GetResponseStream()))
+                {
+                    responseData = responseReader.ReadToEnd();
+                    if (responseData.Contains("TXN_SUCCESS") && responseData.Contains(amount))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        //
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Write("Error " + ex.Message);
+            }
+            return false;
+        }
     }
 }

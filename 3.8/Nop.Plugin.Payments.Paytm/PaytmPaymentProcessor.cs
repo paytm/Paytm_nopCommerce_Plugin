@@ -86,32 +86,38 @@ namespace Nop.Plugin.Payments.Paytm
 			remotePostHelperData.Add("CHANNEL_ID", "WEB");
 			remotePostHelperData.Add("INDUSTRY_TYPE_ID", _PaytmPaymentSettings.IndustryTypeId.ToString());
 			remotePostHelperData.Add("TXN_AMOUNT", postProcessPaymentRequest.Order.OrderTotal.ToString ("#.##"));
-            remotePostHelperData.Add("ORDER_ID", postProcessPaymentRequest.Order.Id.ToString());
+            remotePostHelperData.Add("ORDER_ID",  postProcessPaymentRequest.Order.Id.ToString());
 			remotePostHelperData.Add("EMAIL", postProcessPaymentRequest.Order.BillingAddress.Email);
             remotePostHelperData.Add("MOBILE_NO", postProcessPaymentRequest.Order.BillingAddress.PhoneNumber);
             remotePostHelperData.Add("CUST_ID", postProcessPaymentRequest.Order.BillingAddress.Email);
 			remotePostHelperData.Add("CALLBACK_URL", _webHelper.GetStoreLocation(false) + "Plugins/PaymentPaytm/Return");
 
 			//remotePostHelperData.Add("CALLBACK_URL", _PaytmPaymentSettings.CallBackUrl.ToString());
-            
+            // changes done by mayank -- 
 			Dictionary<string,string> parameters = new Dictionary<string,string> ();
 
-            
-            foreach (var item in remotePostHelperData)
+            foreach (var item in remotePostHelperData.Keys)
             {
-              parameters.Add(item.Key,item.Value);
-			   remotePostHelper.Add(item.Key,item.Value);
+                // below code snippet is mandatory, so that no one can use your checksumgeneration url for other purpose .
+                if (remotePostHelperData[item].Trim().ToUpper().Contains("REFUND") || remotePostHelperData[item].Trim().Contains("|"))
+                {
+                    continue;
+                }
+                else
+                {
+                    parameters.Add(item, remotePostHelperData[item]);
+                    remotePostHelper.Add(item, remotePostHelperData[item]);
+                }
             }
+            
 
-
+            // changes end -- 
             try
             {
                 string checksumHash = "";
 
 				checksumHash = CheckSum.generateCheckSum(_PaytmPaymentSettings.MerchantKey,parameters);
 				remotePostHelper.Add("CHECKSUMHASH", checksumHash);
-               
-                
                 remotePostHelper.Post();
             }
             catch (Exception ep)
@@ -125,7 +131,7 @@ namespace Nop.Plugin.Payments.Paytm
         /// Post process payment (used by payment gateways that require redirecting to a third-party URL)
         /// </summary>
         /// <param name="postProcessPaymentRequest">Payment info required for an order processing</param>
-        public void PostProcessPaymentOld(PostProcessPaymentRequest postProcessPaymentRequest)
+        /*public void PostProcessPaymentOld(PostProcessPaymentRequest postProcessPaymentRequest)
         {
 			var remotePostHelper = new RemotePost();
 			var remotePostHelperData = new Dictionary<string, string>();
@@ -168,7 +174,7 @@ namespace Nop.Plugin.Payments.Paytm
 				throw new Exception(ep.Message);
 			}
         }
-
+        */
         /// <summary>
         /// Returns a value indicating whether payment method should be hidden during checkout
         /// </summary>

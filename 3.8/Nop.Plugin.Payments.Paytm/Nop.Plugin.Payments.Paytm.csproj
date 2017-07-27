@@ -32,8 +32,22 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Nop.Admin">
-      <HintPath>..\..\Presentation\Nop.Web\bin\Nop.Admin.dll</HintPath>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=3.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Autofac.Mvc5.3.3.4\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FluentValidation">
+      <HintPath>..\..\packages\FluentValidation.5.6.2.0\lib\Net45\FluentValidation.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Nop.Core, Version=3.6.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -49,18 +63,9 @@
       <HintPath>..\..\Libraries\Nop.Services\bin\Debug\Nop.Services.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Nop.Web, Version=3.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\Presentation\Nop.Web\bin\Nop.Web.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Nop.Web.Framework">
       <HintPath>..\..\Presentation\Nop.Web\bin\Nop.Web.Framework.dll</HintPath>
       <Private>False</Private>
-    </Reference>
-    <Reference Include="paytm, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Paytm_nopCommerce_v3.5_Kit-master\3.7\Payments.Paytm\paytm.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -75,6 +80,30 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="paytm">
+      <HintPath>paytm.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\PaymentPaytmController.cs" />
@@ -88,9 +117,13 @@
     <Compile Include="RouteProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="logo.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <ProjectReference Include="..\Nop.Plugin.Widgets.GoogleAnalytics\Nop.Plugin.Widgets.GoogleAnalytics.csproj">
+      <Project>{C2B83AF5-80F6-4B8C-8628-FA7DE10C3BB5}</Project>
+      <Name>Nop.Plugin.Widgets.GoogleAnalytics</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Views\PaymentPaytm\Configure.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -109,6 +142,9 @@
   <ItemGroup>
     <Content Include="Description.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="logo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Notes.txt" />
   </ItemGroup>
