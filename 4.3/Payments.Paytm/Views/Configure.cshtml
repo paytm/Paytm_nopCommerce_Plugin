@@ -1,0 +1,123 @@
+﻿@model Nop.Plugin.Payments.Paytm.Models.ConfigurationModel
+@inject Nop.Core.IWebHelper webHelper
+@{
+    Layout = "_ConfigurePlugin";
+}
+
+<form asp-controller="PaymentPaytm" asp-action="Configure" method="post">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+            
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <div class="label-wrapper">
+                                <label class="control-label" for="MerchantId">Merchant Id</label>
+                                <div title="Enter Merchant Id" data-toggle="tooltip" class="ico-help"><i class="fa fa-question-circle"></i></div>
+                            </div>
+                       </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="MerchantId" />
+                        <span asp-validation-for="MerchantId"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <div class="label-wrapper">
+                            <label class="control-label" for="MerchantKey">Merchant Key</label>
+                            <div title="Enter Merchant Key" data-toggle="tooltip" class="ico-help"><i class="fa fa-question-circle"></i></div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="MerchantKey" />
+                        <span asp-validation-for="MerchantKey"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <div class="label-wrapper">
+                            <label class="control-label" for="Website">Website</label>
+                            <div title="Enter Website" data-toggle="tooltip" class="ico-help"><i class="fa fa-question-circle"></i></div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="Website" />
+                        <span asp-validation-for="Website"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <div class="label-wrapper">
+                            <label class="control-label" for="IndustryTypeId">Industry Type Id</label>
+                            <div title="Enter Industry Type Id" data-toggle="tooltip" class="ico-help"><i class="fa fa-question-circle"></i></div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="IndustryTypeId" />
+                        <span asp-validation-for="IndustryTypeId"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <div class="label-wrapper">
+                            <label class="control-label" for="PaymentUrl">Payment Url</label>
+                            <div title="Enter Payment Url" data-toggle="tooltip" class="ico-help"><i class="fa fa-question-circle"></i></div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="PaymentUrl" />
+                        <span asp-validation-for="PaymentUrl"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <div class="label-wrapper">
+                            <label class="control-label" for="TxnStatusUrl">Txn Status Url</label>
+                            <div title="Enter Txn Status Url" data-toggle="tooltip" class="ico-help"><i class="fa fa-question-circle"></i></div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="TxnStatusUrl" />
+                        <span asp-validation-for="TxnStatusUrl"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <div class="label-wrapper">
+                            <label class="control-label" for="CallbackUrl">Call Back Url</label>
+                            <div title="Enter Call Back Url" data-toggle="tooltip" class="ico-help"><i class="fa fa-question-circle"></i></div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="CallBackUrl" />
+                        <span asp-validation-for="CallBackUrl"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <div class="label-wrapper">
+                            <label class="control-label" for="UseDefaultCallBack">Use Default Call Back</label>
+                            <div title="Select Use Default Call Back" data-toggle="tooltip" class="ico-help"><i class="fa fa-question-circle"></i></div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="UseDefaultCallBack" />
+                        <span asp-validation-for="UseDefaultCallBack"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-9 col-md-offset-3">
+                        <input type="submit" name="save" class="btn bg-primary" value="@T("Admin.Common.Save")" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
