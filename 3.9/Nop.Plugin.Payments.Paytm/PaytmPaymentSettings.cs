@@ -1,4 +1,4 @@
-using Nop.Core.Configuration;
+﻿using Nop.Core.Configuration;
 
 namespace Nop.Plugin.Payments.Paytm
 {
@@ -10,5 +10,6 @@ namespace Nop.Plugin.Payments.Paytm
         public string IndustryTypeId { get; set; }
 		public string PaymentUrl{ get; set; }  
 		public string CallBackUrl{ get; set; }
+        public string env { get; set; }
     }
 }

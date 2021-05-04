@@ -45,6 +45,9 @@
     <Reference Include="FluentValidation">
       <HintPath>..\..\packages\FluentValidation.6.4.0\lib\Net45\FluentValidation.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Nop.Core, Version=3.6.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Nop.Core\bin\Debug\Nop.Core.dll</HintPath>
@@ -62,8 +65,8 @@
       <HintPath>..\..\Presentation\Nop.Web\bin\Nop.Web.Framework.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="paytm">
-      <HintPath>..\..\..\c#\.net_4.0\paytm.dll</HintPath>
+    <Reference Include="Paytm">
+      <HintPath>..\..\..\..\..\vb6dll\Paytm.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -130,6 +133,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\PaymentPaytm\Pay.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\PaymentPaytm\JSCheckoutView.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

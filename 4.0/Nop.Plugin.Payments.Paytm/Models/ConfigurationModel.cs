@@ -30,6 +30,9 @@ namespace Nop.Plugin.Payments.Paytm.Models
 
         [NopResourceDisplayName("Plugins.Payments.Paytm.TxnStatusUrl")]
         public string TxnStatusUrl { get; set; }
+        [NopResourceDisplayName("Plugins.Payments.Paytm.env")]
+        public string env { get; set; }
+        public bool env_OverrideForStore { get; set; }
 
     }
 }

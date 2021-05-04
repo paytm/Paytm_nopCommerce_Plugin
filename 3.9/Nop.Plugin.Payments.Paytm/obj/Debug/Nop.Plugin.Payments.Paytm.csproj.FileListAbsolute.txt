@@ -68,3 +68,17 @@ E:\nopCommerce_3.90_Source\Presentation\Nop.Web\Plugins\Payments.Paytm\Nop.Plugi
 E:\nopCommerce_3.90_Source\Presentation\Nop.Web\Plugins\Payments.Paytm\Nop.Plugin.Payments.Paytm.pdb
 E:\nopCommerce_3.90_Source\Plugins\Nop.Plugin.Payments.Paytm\obj\Debug\Nop.Plugin.Payments.Paytm.dll
 E:\nopCommerce_3.90_Source\Plugins\Nop.Plugin.Payments.Paytm\obj\Debug\Nop.Plugin.Payments.Paytm.pdb
+D:\nop 39\nopCommerce-release-3.90\src\Plugins\Nop.Plugin.Payments.Paytm\obj\Debug\Nop.Plugin.Payments.Paytm.csprojAssemblyReference.cache
+D:\nop 39\nopCommerce-release-3.90\src\Plugins\Nop.Plugin.Payments.Paytm\obj\Debug\Nop.Plugin.Payments.Paytm.dll
+D:\nop 39\nopCommerce-release-3.90\src\Plugins\Nop.Plugin.Payments.Paytm\obj\Debug\Nop.Plugin.Payments.Paytm.pdb
+D:\nop 39\nopCommerce-release-3.90\src\Presentation\Nop.Web\Plugins\Payments.Paytm\Views\PaymentPaytm\Configure.cshtml
+D:\nop 39\nopCommerce-release-3.90\src\Presentation\Nop.Web\Plugins\Payments.Paytm\Views\PaymentPaytm\PaymentInfo.cshtml
+D:\nop 39\nopCommerce-release-3.90\src\Presentation\Nop.Web\Plugins\Payments.Paytm\web.config
+D:\nop 39\nopCommerce-release-3.90\src\Presentation\Nop.Web\Plugins\Payments.Paytm\Views\PaymentPaytm\Pay.cshtml
+D:\nop 39\nopCommerce-release-3.90\src\Presentation\Nop.Web\Plugins\Payments.Paytm\Description.txt
+D:\nop 39\nopCommerce-release-3.90\src\Presentation\Nop.Web\Plugins\Payments.Paytm\logo.jpg
+D:\nop 39\nopCommerce-release-3.90\src\Presentation\Nop.Web\Plugins\Payments.Paytm\Nop.Plugin.Payments.Paytm.dll.config
+D:\nop 39\nopCommerce-release-3.90\src\Presentation\Nop.Web\Plugins\Payments.Paytm\Nop.Plugin.Payments.Paytm.dll
+D:\nop 39\nopCommerce-release-3.90\src\Presentation\Nop.Web\Plugins\Payments.Paytm\Nop.Plugin.Payments.Paytm.pdb
+D:\nop 39\nopCommerce-release-3.90\src\Plugins\Nop.Plugin.Payments.Paytm\obj\Debug\Nop.Plugin.Payments.Paytm.csproj.CopyComplete
+D:\nop 39\nopCommerce-release-3.90\src\Presentation\Nop.Web\Plugins\Payments.Paytm\Views\PaymentPaytm\JSCheckoutView.cshtml

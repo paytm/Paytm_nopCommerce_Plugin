@@ -25,7 +25,7 @@
       "Nop.Plugin.Payments.Paytm/1.0.0": {
         "dependencies": {
           "Nop.Web.Framework": "4.3.0",
-          "paytm": "1.0.0.0",
+          "Paytm": "1.0.0.1",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "3.1.0.0",
@@ -3741,15 +3741,15 @@
           "Nop.Web.Framework.dll": {}
         }
       },
-      "paytm/1.0.0.0": {
+      "Paytm/1.0.0.1": {
         "runtime": {
-          "paytm.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
+          "Paytm.dll": {
+            "assemblyVersion": "1.0.0.1",
+            "fileVersion": "1.0.0.1"
           }
         },
         "compile": {
-          "paytm.dll": {}
+          "Paytm.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/3.1.0.0": {
@@ -7345,7 +7345,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "paytm/1.0.0.0": {
+    "Paytm/1.0.0.1": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

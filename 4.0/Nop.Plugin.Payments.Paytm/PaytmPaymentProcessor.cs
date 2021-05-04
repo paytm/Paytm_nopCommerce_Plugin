@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -8,6 +8,8 @@ using System.Text;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Net.Http.Headers;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Nop.Core;
 using Nop.Core.Domain.Directory;
 using Nop.Core.Domain.Orders;
@@ -20,7 +22,7 @@ using Nop.Services.Localization;
 using Nop.Services.Orders;
 using Nop.Services.Payments;
 using Nop.Services.Tax;
-
+using Paytm;
 namespace Nop.Plugin.Payments.Paytm
 {
     /// <summary>
@@ -397,6 +399,11 @@ namespace Nop.Plugin.Payments.Paytm
             }*/
 
             //or add only an order total query parameters to the request
+            string mid, mkey, amount, orderid;
+            mid = _PaytmPaymentSettings.MerchantId.Trim().ToString();
+            mkey = _PaytmPaymentSettings.MerchantKey.Trim().ToString();
+            amount = postProcessPaymentRequest.Order.OrderTotal.ToString("0.00");
+            orderid = postProcessPaymentRequest.Order.Id.ToString();
             queryParameters.Add("MID", _PaytmPaymentSettings.MerchantId.Trim().ToString());
             queryParameters.Add("WEBSITE", _PaytmPaymentSettings.Website.Trim().ToString());
             queryParameters.Add("CHANNEL_ID", "WEB");
@@ -414,19 +421,123 @@ namespace Nop.Plugin.Payments.Paytm
             {
                 queryParameters.Add("CALLBACK_URL", _PaytmPaymentSettings.CallBackUrl.Trim());
             }
+            //queryParameters.Add("CHECKSUMHASH",
+            //             paytm.CheckSum.generateCheckSum(_PaytmPaymentSettings.MerchantKey, queryParameters));
             queryParameters.Add("CHECKSUMHASH",
-                         paytm.CheckSum.generateCheckSum(_PaytmPaymentSettings.MerchantKey, queryParameters));
-
+                      Checksum.generateSignature(queryParameters,_PaytmPaymentSettings.MerchantKey));
             //AddOrderTotalParameters(queryParameters, postProcessPaymentRequest);
-
+            string txntoken = GetTxnToken(amount, mid, orderid, mkey);
             //remove null values from parameters
             queryParameters = queryParameters.Where(parameter => !string.IsNullOrEmpty(parameter.Value))
                 .ToDictionary(parameter => parameter.Key, parameter => parameter.Value);
-
+            string scheme = _httpContextAccessor.HttpContext.Request.Scheme;
+            string host = _httpContextAccessor.HttpContext.Request.Host.ToString();
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("token", txntoken);
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("orderid", orderid);
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("amount", amount);
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("mid", mid);
             var url = QueryHelpers.AddQueryString(GetPaytmUrl(), queryParameters);
-            _httpContextAccessor.HttpContext.Response.Redirect(url);
+            var absoluteUri = string.Concat(scheme, "://", host, "/Plugins/PaymentPaytm/JSCheckoutView");
+            _httpContextAccessor.HttpContext.Response.Redirect(absoluteUri);
+          
         }
+        private string GetTxnToken(string amount, string mid, string orderid, string mkey)
+        {
+            APIResponse apiresponse = new APIResponse();
+            Dictionary<string, object> body = new Dictionary<string, object>();
+            Dictionary<string, string> head = new Dictionary<string, string>();
+            Dictionary<string, object> requestBody = new Dictionary<string, object>();
 
+            Dictionary<string, string> txnAmount = new Dictionary<string, string>();
+            string scheme = _httpContextAccessor.HttpContext.Request.Scheme;
+            string host = _httpContextAccessor.HttpContext.Request.Host.ToString();
+            string displayToken = string.Empty;
+            txnAmount.Add("value", amount);
+            txnAmount.Add("currency", "INR");
+            Dictionary<string, string> userInfo = new Dictionary<string, string>();
+            userInfo.Add("custId", "cust_001");
+            body.Add("requestType", "Payment");
+            body.Add("mid", mid);
+            body.Add("websiteName", _PaytmPaymentSettings.Website.Trim().ToString());
+            body.Add("orderId", orderid);
+            body.Add("txnAmount", txnAmount);
+            body.Add("userInfo", userInfo);
+            body.Add("callbackUrl", string.Concat(scheme, "://", host, "/Plugins/PaymentPaytm/Return"));
+
+            /*
+            * Generate checksum by parameters we have in body
+            * Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys 
+            */
+
+            string paytmChecksum = Checksum.generateSignature(JsonConvert.SerializeObject(body), mkey);
+
+            head.Add("signature", paytmChecksum);
+
+            requestBody.Add("body", body);
+            requestBody.Add("head", head);
+
+            string post_data = JsonConvert.SerializeObject(requestBody);
+            string url = string.Empty;
+            if (_PaytmPaymentSettings.env == "Stage")
+            {
+                //For  Staging
+                url = "https://securegw-stage.paytm.in/theia/api/v1/initiateTransaction?mid=" + mid + "&orderId=" + orderid + " ";
+            }
+            if (_PaytmPaymentSettings.env == "Prod")
+            {
+                //For  Production 
+                url = "https://securegw.paytm.in/theia/api/v1/initiateTransaction?mid=" + mid + "&orderId=" + orderid + "";
+            }
+            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
+
+            webRequest.Method = "POST";
+            webRequest.ContentType = "application/json";
+            webRequest.ContentLength = post_data.Length;
+
+
+            using (StreamWriter requestWriter = new StreamWriter(webRequest.GetRequestStream()))
+            {
+                requestWriter.Write(post_data);
+            }
+
+            string responseData = string.Empty;
+
+            using (StreamReader responseReader = new StreamReader(webRequest.GetResponse().GetResponseStream()))
+            {
+                responseData = responseReader.ReadToEnd();
+                apiresponse = JsonConvert.DeserializeObject<APIResponse>(responseData);
+                JObject jObject = JObject.Parse(responseData);
+                displayToken = jObject.SelectToken("body.txnToken").Value<string>();
+                //  Console.WriteLine(responseData);
+            }
+
+            return displayToken;
+        }
+        public class Head
+        {
+            public string responseTimestamp;
+            public string version;
+            public string signature;
+        }
+        public class ResultInfo
+        {
+            public string resultStatus;
+            public string resultCode;
+            public string resultMsg;
+        }
+        public class Body
+        {
+            public ResultInfo resultInfo;
+            public string txnToken;
+            public string isPromoCodeValid;
+            public string authenticated;
+        }
+        public class APIResponse
+        {
+            public Head head { get; set; }
+            public Body body { get; set; }
+
+        }
         /// <summary>
         /// Returns a value indicating whether payment method should be hidden during checkout
         /// </summary>

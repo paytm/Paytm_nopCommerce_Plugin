@@ -8,7 +8,7 @@ using Nop.Services.Configuration;
 using Nop.Services.Orders;
 using Nop.Services.Payments;
 using Nop.Web.Framework.Controllers;
-using paytm;
+using Paytm;
 using System.Collections.Specialized;
 using System.IO;
 using System.Net;
@@ -47,13 +47,50 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
         [ChildActionOnly]
         public ActionResult Configure()
         {
-            var model = new ConfigurationModel();
-            model.MerchantId = _PaytmPaymentSettings.MerchantId;
-			model.MerchantKey = _PaytmPaymentSettings.MerchantKey;
-			model.Website = _PaytmPaymentSettings.Website;
-			model.IndustryTypeId = _PaytmPaymentSettings.IndustryTypeId;
-			model.PaymentUrl = _PaytmPaymentSettings.PaymentUrl;
-			model.CallBackUrl = _PaytmPaymentSettings.CallBackUrl;
+            ConfigurationModel model;
+            if (_PaytmPaymentSettings.env == "Stage")
+            {
+                model = new ConfigurationModel
+                {
+
+                    MerchantId = _PaytmPaymentSettings.MerchantId,
+                    MerchantKey = _PaytmPaymentSettings.MerchantKey,
+                    Website = _PaytmPaymentSettings.Website,
+                    IndustryTypeId = _PaytmPaymentSettings.IndustryTypeId,
+                    CallBackUrl = _PaytmPaymentSettings.CallBackUrl,
+                   
+                    PaymentUrl = "https://securegw-stage.paytm.in/order/process",
+                  
+                    env = _PaytmPaymentSettings.env
+
+                };
+                // return View("~/Plugins/Payments.Paytm/Views/Configure.cshtml", model);
+            }
+            else
+            {
+                model = new ConfigurationModel
+                {
+
+                    MerchantId = _PaytmPaymentSettings.MerchantId,
+                    MerchantKey = _PaytmPaymentSettings.MerchantKey,
+                    Website = _PaytmPaymentSettings.Website,
+                    IndustryTypeId = _PaytmPaymentSettings.IndustryTypeId,
+                    CallBackUrl = _PaytmPaymentSettings.CallBackUrl,
+                    PaymentUrl = "https://securegw.paytm.in/order/process",
+                  
+                    env = _PaytmPaymentSettings.env
+
+                };
+                //  return View("~/Plugins/Payments.Paytm/Views/Configure.cshtml", model);
+            }
+   //         var model = new ConfigurationModel();
+   //         model.MerchantId = _PaytmPaymentSettings.MerchantId;
+			//model.MerchantKey = _PaytmPaymentSettings.MerchantKey;
+			//model.Website = _PaytmPaymentSettings.Website;
+			//model.IndustryTypeId = _PaytmPaymentSettings.IndustryTypeId;
+           
+   //         model.PaymentUrl = _PaytmPaymentSettings.PaymentUrl;
+			//model.CallBackUrl = _PaytmPaymentSettings.CallBackUrl;
             return View("~/Plugins/Payments.Paytm/Views/PaymentPaytm/Configure.cshtml", model);
         }
 
@@ -70,13 +107,36 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
 			_PaytmPaymentSettings.MerchantKey = model.MerchantKey;
 			_PaytmPaymentSettings.Website = model.Website;
 			_PaytmPaymentSettings.IndustryTypeId = model.IndustryTypeId;
-			_PaytmPaymentSettings.PaymentUrl = model.PaymentUrl;
+            _PaytmPaymentSettings.env = model.env;
+            if (model.env == "Stage")
+            {
+                _PaytmPaymentSettings.PaymentUrl = "https://securegw-stage.paytm.in/order/process";
+
+            }
+            if (model.env == "Prod")
+            {
+                _PaytmPaymentSettings.PaymentUrl = "https://securegw.paytm.in/order/process";
+
+            }
+          //  _PaytmPaymentSettings.PaymentUrl = model.PaymentUrl;
             _PaytmPaymentSettings.CallBackUrl = model.CallBackUrl;
             _settingService.SaveSetting(_PaytmPaymentSettings);
             SuccessNotification(_localizationService.GetResource("Admin.Plugins.Saved"));
             return Configure();
         }
 
+        public ActionResult JSCheckoutView(string token, string orderid, string amount, string mid)
+        {
+
+            ViewData["env"] = _PaytmPaymentSettings.env;
+            ViewData["OrderId"] = Request.Cookies["orderid"].Value;
+            ViewData["txntoken"] = Request.Cookies["token"].Value;
+            ViewData["amount"] = Request.Cookies["amount"].Value;
+            ViewData["mid"] = Request.Cookies["mid"].Value;
+
+            String viewName = "~/Plugins/Payments.Paytm/Views/PaymentPaytm/JSCheckoutView.cshtml";
+            return View(viewName);
+        }
         [ChildActionOnly]
         public ActionResult PaymentInfo()
         {
@@ -139,26 +199,30 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
                     paytmChecksum = parameters["CHECKSUMHASH"];
                     parameters.Remove("CHECKSUMHASH");
                 }
-                if (!string.IsNullOrEmpty(paytmChecksum) && CheckSum.verifyCheckSum(workingKey, parameters, paytmChecksum))
+                //if (!string.IsNullOrEmpty(paytmChecksum) && CheckSum.verifyCheckSum(workingKey, parameters, paytmChecksum))
+                //{
+                //    checkSumMatch = true;
+                //}
+                if (!string.IsNullOrEmpty(paytmChecksum) && Checksum.verifySignature(parameters,workingKey,paytmChecksum))
                 {
                     checkSumMatch = true;
                 }
-                    /*
-                    string paytmChecksum="";
-                    foreach (string key in Request.Form.Keys){
-                        parameters.Add(key.Trim(), Request.Form[key].Trim());
-                    }
-
-                    if(parameters.ContainsKey("CHECKSUMHASH")){
-                        paytmChecksum = parameters["CHECKSUMHASH"];
-                        parameters.Remove("CHECKSUMHASH");
-                    }
-
-                    if (CheckSum.verifyCheckSum(workingKey, parameters, paytmChecksum))	{
-                        checkSumMatch = true;
-
-                    }*/
+                /*
+                string paytmChecksum="";
+                foreach (string key in Request.Form.Keys){
+                    parameters.Add(key.Trim(), Request.Form[key].Trim());
                 }
+
+                if(parameters.ContainsKey("CHECKSUMHASH")){
+                    paytmChecksum = parameters["CHECKSUMHASH"];
+                    parameters.Remove("CHECKSUMHASH");
+                }
+
+                if (CheckSum.verifyCheckSum(workingKey, parameters, paytmChecksum))	{
+                    checkSumMatch = true;
+
+                }*/
+            }
 
             orderId = parameters["ORDERID"];
 			Amount = parameters["TXNAMOUNT"];
@@ -289,7 +353,7 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
         private bool TxnStatus(string OrderId, String amount)
         {
             String uri = "https://pguat.paytm.com/oltp/HANDLER_INTERNAL/getTxnStatus";
-            if (_PaytmPaymentSettings.PaymentUrl.ToLower().Contains("secure.paytm.in"))
+            if (_PaytmPaymentSettings.PaymentUrl.ToLower().Contains("securegw.paytm.in"))
             {
                 uri = "https://secure.paytm.in/oltp/HANDLER_INTERNAL/getTxnStatus";
             }
@@ -299,8 +363,8 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
             parameters.Add("MID", _PaytmPaymentSettings.MerchantId);
             parameters.Add("ORDERID", OrderId);
 
-            string checksum = CheckSum.generateCheckSum(_PaytmPaymentSettings.MerchantKey, parameters);//.Replace("+", "%2B");
-            
+           // string checksum = CheckSum.generateCheckSum(_PaytmPaymentSettings.MerchantKey, parameters);//.Replace("+", "%2B");
+            string checksum = Checksum.generateSignature(parameters,_PaytmPaymentSettings.MerchantKey);//.Replace("+", "%2B");
             try
             {
                 string postData = "{\"MID\":\""+ _PaytmPaymentSettings.MerchantId+ "\",\"ORDERID\":\""+OrderId+"\",\"CHECKSUMHASH\":\""+ HttpUtility.UrlEncode(checksum) + "\"}";

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Web.Routing;
@@ -14,9 +14,16 @@ using Nop.Services.Directory;
 using Nop.Services.Localization;
 using Nop.Services.Payments;
 using Nop.Web.Framework;
-using paytm;
+using Paytm;
+
 //using CCA.Util;
 using System.Collections.Specialized;
+using System.Web;
+using System.IO;
+using Newtonsoft.Json;
+using System.Net;
+using Newtonsoft.Json.Linq;
+
 namespace Nop.Plugin.Payments.Paytm
 {
     /// <summary>
@@ -25,7 +32,7 @@ namespace Nop.Plugin.Payments.Paytm
     public class PaytmPaymentProcessor : BasePlugin, IPaymentMethod
     {
         #region Fields
-
+      
         private readonly PaytmPaymentSettings _PaytmPaymentSettings;
         private readonly ISettingService _settingService;
         private readonly ICurrencyService _currencyService;
@@ -80,9 +87,20 @@ namespace Nop.Plugin.Payments.Paytm
 			//amount.ToString ();
             var remotePostHelper = new RemotePost();
             var remotePostHelperData = new Dictionary<string, string>();
+            var getUrlData = HttpContext.Current.Request;
+            string scheme = getUrlData.Url.Scheme;
+            string host = getUrlData.Url.Authority;
             
+            var absoluteUri = string.Concat(scheme, "://", host, "/Plugins/PaymentPaytm/JSCheckoutView");
+           
+            string mid, mkey, amount, orderid;
+            mid = _PaytmPaymentSettings.MerchantId.Trim().ToString();
+            mkey = _PaytmPaymentSettings.MerchantKey.Trim().ToString();
+            amount = postProcessPaymentRequest.Order.OrderTotal.ToString("0.00");
+            orderid = postProcessPaymentRequest.Order.Id.ToString();
             remotePostHelper.FormName = "PaytmForm";
-			remotePostHelper.Url = _PaytmPaymentSettings.PaymentUrl;
+			//remotePostHelper.Url = _PaytmPaymentSettings.PaymentUrl;
+            remotePostHelper.Url = absoluteUri;
             remotePostHelperData.Add("MID", _PaytmPaymentSettings.MerchantId.ToString());
 			remotePostHelperData.Add("WEBSITE", _PaytmPaymentSettings.Website.ToString());
 			remotePostHelperData.Add("CHANNEL_ID", "WEB");
@@ -93,8 +111,13 @@ namespace Nop.Plugin.Payments.Paytm
             remotePostHelperData.Add("MOBILE_NO", postProcessPaymentRequest.Order.BillingAddress.PhoneNumber);
             remotePostHelperData.Add("CUST_ID", postProcessPaymentRequest.Order.BillingAddress.Email);
 			remotePostHelperData.Add("CALLBACK_URL", _webHelper.GetStoreLocation(false) + "Plugins/PaymentPaytm/Return");
-            
-            //remotePostHelperData.Add("CALLBACK_URL", _PaytmPaymentSettings.CallBackUrl.ToString());
+            string txntoken = GetTxnToken(amount, mid, orderid, mkey);
+            HttpContext.Current.Response.Cookies.Add(new HttpCookie("amount", amount));
+            HttpContext.Current.Response.Cookies.Add(new HttpCookie("mid", mid));
+            HttpContext.Current.Response.Cookies.Add(new HttpCookie("mkey", mkey));
+            HttpContext.Current.Response.Cookies.Add(new HttpCookie("orderid", orderid));
+            HttpContext.Current.Response.Cookies.Add(new HttpCookie("token", txntoken));
+
             // changes done by mayank -- 
             Dictionary<string,string> parameters = new Dictionary<string,string> ();
 
@@ -118,8 +141,9 @@ namespace Nop.Plugin.Payments.Paytm
             {
                 string checksumHash = "";
 
-				checksumHash = CheckSum.generateCheckSum(_PaytmPaymentSettings.MerchantKey,parameters);
-				remotePostHelper.Add("CHECKSUMHASH", checksumHash);
+				//checksumHash = CheckSum.generateCheckSum(_PaytmPaymentSettings.MerchantKey,parameters);
+                checksumHash = Checksum.generateSignature(parameters,_PaytmPaymentSettings.MerchantKey);
+                remotePostHelper.Add("CHECKSUMHASH", checksumHash);
                 remotePostHelper.Post();
             }
             catch (Exception ep)
@@ -128,7 +152,103 @@ namespace Nop.Plugin.Payments.Paytm
             }
         }
 
+        private string GetTxnToken(string amount, string mid, string orderid, string mkey)
+        {
+            APIResponse apiresponse = new APIResponse();
+            Dictionary<string, object> body = new Dictionary<string, object>();
+            Dictionary<string, string> head = new Dictionary<string, string>();
+            Dictionary<string, object> requestBody = new Dictionary<string, object>();
 
+            Dictionary<string, string> txnAmount = new Dictionary<string, string>();
+            var getUrlData = HttpContext.Current.Request;
+            string scheme = getUrlData.Url.Scheme;
+            string host = getUrlData.Url.Authority;
+            string displayToken = string.Empty;
+            txnAmount.Add("value", amount);
+            txnAmount.Add("currency", "INR");
+            Dictionary<string, string> userInfo = new Dictionary<string, string>();
+            userInfo.Add("custId", "cust_001");
+            body.Add("requestType", "Payment");
+            body.Add("mid", mid);
+            body.Add("websiteName", _PaytmPaymentSettings.Website.Trim().ToString());
+            body.Add("orderId", orderid);
+            body.Add("txnAmount", txnAmount);
+            body.Add("userInfo", userInfo);
+           body.Add("callbackUrl", string.Concat(scheme, "://", host, "/Plugins/PaymentPaytm/Return"));
+
+            /*
+            * Generate checksum by parameters we have in body
+            * Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys 
+            */
+
+            string paytmChecksum = Checksum.generateSignature(JsonConvert.SerializeObject(body), mkey);
+
+            head.Add("signature", paytmChecksum);
+
+            requestBody.Add("body", body);
+            requestBody.Add("head", head);
+
+            string post_data = JsonConvert.SerializeObject(requestBody);
+            string url = string.Empty;
+            if (_PaytmPaymentSettings.env == "Stage")
+            {
+                //For  Staging
+                url = "https://securegw-stage.paytm.in/theia/api/v1/initiateTransaction?mid=" + mid + "&orderId=" + orderid + " ";
+            }
+            if (_PaytmPaymentSettings.env == "Prod")
+            {
+                //For  Production 
+                url = "https://securegw.paytm.in/theia/api/v1/initiateTransaction?mid=" + mid + "&orderId=" + orderid + "";
+            }
+            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
+
+            webRequest.Method = "POST";
+            webRequest.ContentType = "application/json";
+            webRequest.ContentLength = post_data.Length;
+
+            using (StreamWriter requestWriter = new StreamWriter(webRequest.GetRequestStream()))
+            {
+                requestWriter.Write(post_data);
+            }
+
+            string responseData = string.Empty;
+
+            using (StreamReader responseReader = new StreamReader(webRequest.GetResponse().GetResponseStream()))
+            {
+                responseData = responseReader.ReadToEnd();
+                apiresponse = JsonConvert.DeserializeObject<APIResponse>(responseData);
+                JObject jObject = JObject.Parse(responseData);
+                displayToken = jObject.SelectToken("body.txnToken").Value<string>();
+                //  Console.WriteLine(responseData);
+            }
+
+            return displayToken;
+        }
+        public class Head
+        {
+            public string responseTimestamp;
+            public string version;
+            public string signature;
+        }
+        public class ResultInfo
+        {
+            public string resultStatus;
+            public string resultCode;
+            public string resultMsg;
+        }
+        public class Body
+        {
+            public ResultInfo resultInfo;
+            public string txnToken;
+            public string isPromoCodeValid;
+            public string authenticated;
+        }
+        public class APIResponse
+        {
+            public Head head { get; set; }
+            public Body body { get; set; }
+
+        }
         /// <summary>
         /// Post process payment (used by payment gateways that require redirecting to a third-party URL)
         /// </summary>

@@ -1,0 +1,413 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\nop40\\nopCommerce-release-4.00\\src\\Plugins\\Nop.Plugin.Payments.Paytm\\Nop.Plugin.Payments.Paytm.csproj": {}
+  },
+  "projects": {
+    "D:\\nop40\\nopCommerce-release-4.00\\src\\Libraries\\Nop.Core\\Nop.Core.csproj": {
+      "version": "4.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\nop40\\nopCommerce-release-4.00\\src\\Libraries\\Nop.Core\\Nop.Core.csproj",
+        "projectName": "Nop.Core",
+        "projectPath": "D:\\nop40\\nopCommerce-release-4.00\\src\\Libraries\\Nop.Core\\Nop.Core.csproj",
+        "packagesPath": "C:\\Users\\sahil.kukreja\\.nuget\\packages\\",
+        "outputPath": "D:\\nop40\\nopCommerce-release-4.00\\src\\Libraries\\Nop.Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\sahil.kukreja\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net461"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net461": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net461": {
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[6.1.1, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "Autofac": {
+              "target": "Package",
+              "version": "[4.6.2, )"
+            },
+            "Autofac.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
+            "Microsoft.AspNetCore": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.Cookies": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.OAuth": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "Microsoft.AspNetCore.DataProtection.Redis": {
+              "target": "Package",
+              "version": "[0.3.0, )"
+            },
+            "Microsoft.AspNetCore.Diagnostics": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "Microsoft.AspNetCore.Hosting.Abstractions": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "Microsoft.AspNetCore.ResponseCompression": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "Microsoft.AspNetCore.Routing": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "Microsoft.AspNetCore.Session": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "Microsoft.AspNetCore.StaticFiles": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "Microsoft.Extensions.Caching.Memory": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Binder": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "Microsoft.Extensions.Primitives": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "MiniProfiler.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[4.0.0-alpha7-142, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[10.0.3, )"
+            },
+            "RedLock.net.StrongName": {
+              "target": "Package",
+              "version": "[1.7.5, )"
+            },
+            "StackExchange.Redis.StrongName": {
+              "target": "Package",
+              "version": "[1.2.6, )"
+            },
+            "System.IO.Compression": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\nop40\\nopCommerce-release-4.00\\src\\Libraries\\Nop.Data\\Nop.Data.csproj": {
+      "version": "4.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\nop40\\nopCommerce-release-4.00\\src\\Libraries\\Nop.Data\\Nop.Data.csproj",
+        "projectName": "Nop.Data",
+        "projectPath": "D:\\nop40\\nopCommerce-release-4.00\\src\\Libraries\\Nop.Data\\Nop.Data.csproj",
+        "packagesPath": "C:\\Users\\sahil.kukreja\\.nuget\\packages\\",
+        "outputPath": "D:\\nop40\\nopCommerce-release-4.00\\src\\Libraries\\Nop.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\sahil.kukreja\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net461"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net461": {
+            "projectReferences": {
+              "D:\\nop40\\nopCommerce-release-4.00\\src\\Libraries\\Nop.Core\\Nop.Core.csproj": {
+                "projectPath": "D:\\nop40\\nopCommerce-release-4.00\\src\\Libraries\\Nop.Core\\Nop.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net461": {
+          "dependencies": {
+            "EntityFramework.SqlServerCompact": {
+              "target": "Package",
+              "version": "[6.2.0, )"
+            },
+            "Microsoft.CSharp": {
+              "target": "Package",
+              "version": "[4.4.0, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\nop40\\nopCommerce-release-4.00\\src\\Libraries\\Nop.Services\\Nop.Services.csproj": {
+      "version": "4.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\nop40\\nopCommerce-release-4.00\\src\\Libraries\\Nop.Services\\Nop.Services.csproj",
+        "projectName": "Nop.Services",
+        "projectPath": "D:\\nop40\\nopCommerce-release-4.00\\src\\Libraries\\Nop.Services\\Nop.Services.csproj",
+        "packagesPath": "C:\\Users\\sahil.kukreja\\.nuget\\packages\\",
+        "outputPath": "D:\\nop40\\nopCommerce-release-4.00\\src\\Libraries\\Nop.Services\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\sahil.kukreja\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net461"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net461": {
+            "projectReferences": {
+              "D:\\nop40\\nopCommerce-release-4.00\\src\\Libraries\\Nop.Core\\Nop.Core.csproj": {
+                "projectPath": "D:\\nop40\\nopCommerce-release-4.00\\src\\Libraries\\Nop.Core\\Nop.Core.csproj"
+              },
+              "D:\\nop40\\nopCommerce-release-4.00\\src\\Libraries\\Nop.Data\\Nop.Data.csproj": {
+                "projectPath": "D:\\nop40\\nopCommerce-release-4.00\\src\\Libraries\\Nop.Data\\Nop.Data.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net461": {
+          "dependencies": {
+            "EPPlus": {
+              "target": "Package",
+              "version": "[4.1.1, )"
+            },
+            "ImageResizer.Plugins.PrettyGifs": {
+              "target": "Package",
+              "version": "[4.1.11, )"
+            },
+            "MaxMind.GeoIP2": {
+              "target": "Package",
+              "version": "[2.9.0, )"
+            },
+            "Microsoft.CSharp": {
+              "target": "Package",
+              "version": "[4.4.0, )"
+            },
+            "System.Linq.Dynamic": {
+              "target": "Package",
+              "version": "[1.0.7, )"
+            },
+            "System.ServiceModel.Duplex": {
+              "target": "Package",
+              "version": "[4.4.0, )"
+            },
+            "System.ServiceModel.Http": {
+              "target": "Package",
+              "version": "[4.4.0, )"
+            },
+            "System.ServiceModel.NetTcp": {
+              "target": "Package",
+              "version": "[4.4.0, )"
+            },
+            "System.ServiceModel.Security": {
+              "target": "Package",
+              "version": "[4.4.0, )"
+            },
+            "System.Xml.XmlSerializer": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "WindowsAzure.Storage": {
+              "target": "Package",
+              "version": "[8.5.0, )"
+            },
+            "iTextSharp": {
+              "target": "Package",
+              "version": "[5.5.12, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\nop40\\nopCommerce-release-4.00\\src\\Plugins\\Nop.Plugin.Payments.Paytm\\Nop.Plugin.Payments.Paytm.csproj": {
+      "version": "1.42.0",
+      "restore": {
+        "projectUniqueName": "D:\\nop40\\nopCommerce-release-4.00\\src\\Plugins\\Nop.Plugin.Payments.Paytm\\Nop.Plugin.Payments.Paytm.csproj",
+        "projectName": "Nop.Plugin.Payments.Paytm",
+        "projectPath": "D:\\nop40\\nopCommerce-release-4.00\\src\\Plugins\\Nop.Plugin.Payments.Paytm\\Nop.Plugin.Payments.Paytm.csproj",
+        "packagesPath": "C:\\Users\\sahil.kukreja\\.nuget\\packages\\",
+        "outputPath": "D:\\nop40\\nopCommerce-release-4.00\\src\\Plugins\\Nop.Plugin.Payments.Paytm\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\sahil.kukreja\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net461"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net461": {
+            "projectReferences": {
+              "D:\\nop40\\nopCommerce-release-4.00\\src\\Presentation\\Nop.Web.Framework\\Nop.Web.Framework.csproj": {
+                "projectPath": "D:\\nop40\\nopCommerce-release-4.00\\src\\Presentation\\Nop.Web.Framework\\Nop.Web.Framework.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net461": {
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\nop40\\nopCommerce-release-4.00\\src\\Presentation\\Nop.Web.Framework\\Nop.Web.Framework.csproj": {
+      "version": "4.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\nop40\\nopCommerce-release-4.00\\src\\Presentation\\Nop.Web.Framework\\Nop.Web.Framework.csproj",
+        "projectName": "Nop.Web.Framework",
+        "projectPath": "D:\\nop40\\nopCommerce-release-4.00\\src\\Presentation\\Nop.Web.Framework\\Nop.Web.Framework.csproj",
+        "packagesPath": "C:\\Users\\sahil.kukreja\\.nuget\\packages\\",
+        "outputPath": "D:\\nop40\\nopCommerce-release-4.00\\src\\Presentation\\Nop.Web.Framework\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\sahil.kukreja\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net461"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net461": {
+            "projectReferences": {
+              "D:\\nop40\\nopCommerce-release-4.00\\src\\Libraries\\Nop.Core\\Nop.Core.csproj": {
+                "projectPath": "D:\\nop40\\nopCommerce-release-4.00\\src\\Libraries\\Nop.Core\\Nop.Core.csproj"
+              },
+              "D:\\nop40\\nopCommerce-release-4.00\\src\\Libraries\\Nop.Data\\Nop.Data.csproj": {
+                "projectPath": "D:\\nop40\\nopCommerce-release-4.00\\src\\Libraries\\Nop.Data\\Nop.Data.csproj"
+              },
+              "D:\\nop40\\nopCommerce-release-4.00\\src\\Libraries\\Nop.Services\\Nop.Services.csproj": {
+                "projectPath": "D:\\nop40\\nopCommerce-release-4.00\\src\\Libraries\\Nop.Services\\Nop.Services.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net461": {
+          "dependencies": {
+            "BundlerMinifier.Core": {
+              "target": "Package",
+              "version": "[2.6.362, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[7.2.1, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

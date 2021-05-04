@@ -1,0 +1,88 @@
+﻿
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+    <title>Paytm Blink Checkout - .net</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+
+    <!-- <script type="application/javascript" crossorigin="anonymous" src="https://securegw-stage.paytm.in/merchantpgpui/checkoutjs/merchants/INTEGR48430372304363.js"></script> -->
+</head>
+<body>
+    <div>
+      
+    </div>
+    <div class="container text-center">
+       
+    </div>
+    <script>
+        var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewData));
+
+        var orderId = data.OrderId;
+        var txnToken = data.txntoken;
+        var amount = data.amount;
+        var mid = data.mid;
+        var env = data.env;
+        debugger;
+        function getmid() {
+            console.log("enter getmid method");
+            if (env == "Stage") {
+                console.log("Stage");
+                var midnew = mid;
+                var my_awesome_script = document.createElement('script');
+                my_awesome_script.setAttribute('src', 'https://securegw-stage.paytm.in/merchantpgpui/checkoutjs/merchants/' + midnew);
+                my_awesome_script.setAttribute('crossorigin', 'anonymous');
+                my_awesome_script.setAttribute('type', 'application/javascript');
+                document.head.appendChild(my_awesome_script);
+                return midnew;
+            }
+            if (env == "Prod") {
+                 console.log("prod");
+                var midnew = mid;
+                var my_awesome_script = document.createElement('script');
+                my_awesome_script.setAttribute('src', 'https://securegw.paytm.in/merchantpgpui/checkoutjs/merchants/' + midnew);
+                my_awesome_script.setAttribute('crossorigin', 'anonymous');
+                my_awesome_script.setAttribute('type', 'application/javascript');
+                document.head.appendChild(my_awesome_script);
+                return midnew;
+            }
+
+        }
+        getmid();
+        window.addEventListener('load', function() {
+					setTimeout(()=>{openBlinkCheckoutPopup(orderId, txnToken, amount)}, 2000);
+				});
+        function openBlinkCheckoutPopup(orderId, txnToken, amount) {
+            console.log("openBlinkCheckoutPopup called");
+            var config = {
+                "root": "",
+                "flow": "DEFAULT",
+                "data": {
+                    "orderId": orderId,
+                    "token": txnToken,
+                    "tokenType": "TXN_TOKEN",
+                    "amount": amount
+                },
+                "handler": {
+                    "notifyMerchant": function (eventName, data) {
+                        location.reload();
+                    }
+                }
+            };
+            if (window.Paytm && window.Paytm.CheckoutJS) {
+                // initialze configuration using init method
+                window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
+                    // after successfully updating configuration, invoke checkoutjs
+                    window.Paytm.CheckoutJS.invoke();
+                   
+                }).catch(function onError(error) {
+                    console.log("error => ", error);
+                });
+            }
+        }
+    </script>
+</body>
+</html>

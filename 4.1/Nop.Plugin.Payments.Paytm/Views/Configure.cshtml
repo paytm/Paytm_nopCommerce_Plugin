@@ -48,7 +48,7 @@
                         <span asp-validation-for="IndustryTypeId"></span>
                     </div>
                 </div>
-                <div class="form-group">
+                @*<div class="form-group">
                     <div class="col-md-3">
                         <nop-override-store-checkbox asp-for="PaymentUrl" asp-input="PaymentUrl" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
                         <nop-label asp-for="PaymentUrl" />
@@ -67,8 +67,33 @@
                         <nop-editor asp-for="TxnStatusUrl" />
                         <span asp-validation-for="TxnStatusUrl"></span>
                     </div>
-                </div>
+                </div>*@
+
                 <div class="form-group">
+                    <div class=" col-md-3">
+                        <div class="label-wrapper">
+                            <label class="control-label" for="Environment">Environment</label>
+                            <div title="Select Environment" data-toggle="tooltip" class="ico-help">
+
+                                <i class="fa fa-question-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(m => m.env, new List<SelectListItem>
+
+                    {
+                   new SelectListItem{Text="Staging",Value="Stage"},
+                       new SelectListItem{Text="Production",Value="Prod"}
+
+                   }, new { @class = "form-control text-box single-line" })
+
+
+                    </div>
+
+                </div>
+
+                <div class="form-group" hidden="hidden">
                     <div class="col-md-3">
                         <nop-override-store-checkbox asp-for="CallBackUrl" asp-input="CallBackUrl" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
                         <nop-label asp-for="CallBackUrl" />
@@ -78,7 +103,7 @@
                         <span asp-validation-for="CallBackUrl"></span>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" hidden="hidden">
                     <div class="col-md-3">
                         <nop-override-store-checkbox asp-for="UseDefaultCallBack" asp-input="UseDefaultCallBack" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
                         <nop-label asp-for="UseDefaultCallBack" />

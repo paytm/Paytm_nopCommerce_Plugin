@@ -1,4 +1,4 @@
-using Nop.Core.Configuration;
+﻿using Nop.Core.Configuration;
 
 namespace Nop.Plugin.Payments.Paytm
 {
@@ -16,5 +16,6 @@ namespace Nop.Plugin.Payments.Paytm
         public string TxnStatusUrl { get; set; }
         public bool UseDefaultCallBack { get; set; }
         public string PdtToken { get; set; }
+        public string env { get; set; }
     }
 }

@@ -22,6 +22,8 @@ namespace Nop.Plugin.Payments.Paytm.Models
 
 		[NopResourceDisplayName("Plugins.Payments.Paytm.CallBackUrl")]
 		public string CallBackUrl { get; set; }
+        [NopResourceDisplayName("Plugins.Payments.Paytm.env")]
+        public string env { get; set; }
 
     }
 }

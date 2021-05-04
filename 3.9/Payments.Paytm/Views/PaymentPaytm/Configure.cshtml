@@ -8,7 +8,7 @@
 {
     @Html.AntiForgeryToken()
     <table class="adminContent">
-        
+
         <tr>
             <td class="adminTitle">
                 @Html.NopLabelFor(model => model.MerchantId):
@@ -45,20 +45,37 @@
                 @Html.ValidationMessageFor(model => model.IndustryTypeId)
             </td>
         </tr>
+
         <tr>
             <td class="adminTitle">
-                @Html.NopLabelFor(model => model.PaymentUrl):
+                <div class="label-wrapper"><label class="control-label" for="IndustryTypeId" title="">Environment</label><div class="ico-help" title="Enter Industry Type Id."><i class="fa fa-question-circle"></i></div></div>
             </td>
             <td class="adminData">
+
+                @Html.DropDownListFor(model => model.env, new List<SelectListItem>
+
+            {
+           new SelectListItem{Text="Staging",Value="Stage"},
+               new SelectListItem{Text="Production",Value="Prod"}
+
+           })
+            </td>
+        </tr>
+      
+        <tr>
+            <td class="adminTitle" hidden="hidden">
+                @Html.NopLabelFor(model => model.PaymentUrl):
+            </td>
+            <td class="adminData" hidden="hidden">
                 @Html.EditorFor(model => model.PaymentUrl)
                 @Html.ValidationMessageFor(model => model.PaymentUrl)
             </td>
         </tr>
         <tr>
-            <td class="adminTitle">
+            <td class="adminTitle" hidden="hidden">
                 @Html.NopLabelFor(model => model.CallBackUrl):
             </td>
-            <td class="adminData">
+            <td class="adminData" hidden="hidden">
                 @Html.EditorFor(model => model.CallBackUrl)
                 @Html.ValidationMessageFor(model => model.CallBackUrl)
             </td>
@@ -66,7 +83,8 @@
         <tr>
             <td colspan="2">
                 <button type="submit" name="save" value="save" class="k-button">
-                    Save</button>
+                    Save
+                </button>
             </td>
         </tr>
     </table>

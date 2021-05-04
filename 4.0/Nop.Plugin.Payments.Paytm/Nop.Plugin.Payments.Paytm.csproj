@@ -43,13 +43,16 @@
     <Content Include="Views\_ViewImports.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+   <Content Include="Views\JSCheckoutView.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Presentation\Nop.Web.Framework\Nop.Web.Framework.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="paytm">
-      <HintPath>..\..\..\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\paytm.dll</HintPath>
+    <Reference Include="Paytm">
+      <HintPath>..\..\..\..\..\vb6dll\Paytm.dll</HintPath>
     </Reference>
   </ItemGroup>
   <!-- This target execute after "Build" target -->

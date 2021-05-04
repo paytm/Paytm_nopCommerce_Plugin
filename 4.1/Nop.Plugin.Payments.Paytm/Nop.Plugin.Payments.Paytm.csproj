@@ -45,6 +45,9 @@
     <Content Include="Views\_ViewImports.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+   <Content Include="Views\JSCheckoutView.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   
   <ItemGroup>
@@ -52,8 +55,8 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Reference Include="paytm">
-      <HintPath>..\..\..\nopCommerce_3.80_Source\Plugins\Nop.Plugin.Payments.Paytm\paytm.dll</HintPath>
+    <Reference Include="Paytm">
+      <HintPath>..\..\..\..\..\vb6dll\Paytm.dll</HintPath>
     </Reference>
   </ItemGroup>
   

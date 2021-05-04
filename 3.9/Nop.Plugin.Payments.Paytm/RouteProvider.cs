@@ -14,6 +14,12 @@ namespace Nop.Plugin.Payments.Paytm
                  new { controller = "PaymentPaytm", action = "Return" },
                  new[] { "Nop.Plugin.Payments.Paytm.Controllers" }
             );
+
+            routes.MapRoute("Plugin.Payments.Paytm.JSCheckoutView",
+                "Plugins/PaymentPaytm/JSCheckoutView",
+                new { controller = "PaymentPaytm", action = "JSCheckoutView" },
+                new[] { "Nop.Plugin.Payments.Paytm.Controllers" }
+           );
         }
         public int Priority
         {

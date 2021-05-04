@@ -1,0 +1,15 @@
+D:\nop41\nopCommerce-release-4.10\src\Presentation\Nop.Web\Plugins\Payments.Paytm\plugin.json
+D:\nop41\nopCommerce-release-4.10\src\Presentation\Nop.Web\Plugins\Payments.Paytm\Views\Configure.cshtml
+D:\nop41\nopCommerce-release-4.10\src\Presentation\Nop.Web\Plugins\Payments.Paytm\Views\PaymentInfo.cshtml
+D:\nop41\nopCommerce-release-4.10\src\Presentation\Nop.Web\Plugins\Payments.Paytm\Views\_ViewImports.cshtml
+D:\nop41\nopCommerce-release-4.10\src\Presentation\Nop.Web\Plugins\Payments.Paytm\Views\JSCheckoutView.cshtml
+D:\nop41\nopCommerce-release-4.10\src\Presentation\Nop.Web\Plugins\Payments.Paytm\logo.jpg
+D:\nop41\nopCommerce-release-4.10\src\Presentation\Nop.Web\Plugins\Payments.Paytm\Nop.Plugin.Payments.Paytm.deps.json
+D:\nop41\nopCommerce-release-4.10\src\Presentation\Nop.Web\Plugins\Payments.Paytm\Nop.Plugin.Payments.Paytm.dll
+D:\nop41\nopCommerce-release-4.10\src\Presentation\Nop.Web\Plugins\Payments.Paytm\Nop.Plugin.Payments.Paytm.pdb
+D:\nop41\nopCommerce-release-4.10\src\Plugins\Nop.Plugin.Payments.Paytm\obj\Debug\netcoreapp2.1\Nop.Plugin.Payments.Paytm.csprojAssemblyReference.cache
+D:\nop41\nopCommerce-release-4.10\src\Plugins\Nop.Plugin.Payments.Paytm\obj\Debug\netcoreapp2.1\Nop.Plugin.Payments.Paytm.AssemblyInfoInputs.cache
+D:\nop41\nopCommerce-release-4.10\src\Plugins\Nop.Plugin.Payments.Paytm\obj\Debug\netcoreapp2.1\Nop.Plugin.Payments.Paytm.AssemblyInfo.cs
+D:\nop41\nopCommerce-release-4.10\src\Plugins\Nop.Plugin.Payments.Paytm\obj\Debug\netcoreapp2.1\Nop.Plugin.Payments.Paytm.csproj.CopyComplete
+D:\nop41\nopCommerce-release-4.10\src\Plugins\Nop.Plugin.Payments.Paytm\obj\Debug\netcoreapp2.1\Nop.Plugin.Payments.Paytm.dll
+D:\nop41\nopCommerce-release-4.10\src\Plugins\Nop.Plugin.Payments.Paytm\obj\Debug\netcoreapp2.1\Nop.Plugin.Payments.Paytm.pdb
