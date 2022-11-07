@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Nop.Core;
@@ -288,7 +289,7 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
                     }
                     if (paymentstatus == "Pending" && paymentstatusnew == "TXN_FAILURE")
                     {
-                        order.PaymentStatus = PaymentStatus.Fail;
+                        order.PaymentStatus = PaymentStatus.Pending;
                         order.OrderStatus = OrderStatus.Cancelled;
                         _orderService.UpdateOrderAsync(order);
                     }
@@ -297,8 +298,7 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
 
         }
 
-
-
+        [IgnoreAntiforgeryToken]
         public ActionResult Return()
         {
 
@@ -308,7 +308,7 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
 
 
             var myUtility = new PaytmHelper();
-            string orderId, amount, authDesc, resCode;
+            string orderId, amount, authDesc, resCode, orderIdRaw;
             bool checkSumMatch = false;
             //Assign following values to send it to verifychecksum function.
             if (String.IsNullOrWhiteSpace(_paytmPaymentSettings.MerchantKey))
@@ -349,7 +349,8 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
                 }
             }
 
-            orderId = parameters["ORDERID"];
+            orderIdRaw = parameters["ORDERID"];
+            orderId = Regex.Replace(orderIdRaw, @"_.*", "");
             amount = parameters["TXNAMOUNT"];
             resCode = parameters["RESPCODE"];
             authDesc = parameters["STATUS"];
@@ -361,7 +362,7 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
 
                 if (resCode == "01" && authDesc == "TXN_SUCCESS")
                 {
-                    if (TxnStatus(orderId, order.OrderTotal.ToString("0.00")))
+                    if (TxnStatus(orderIdRaw, order.OrderTotal.ToString("0.00")))
                     {
                         if (_orderProcessingService.CanMarkOrderAsPaid(order))
                         {

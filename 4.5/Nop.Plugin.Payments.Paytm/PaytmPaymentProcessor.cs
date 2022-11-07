@@ -25,6 +25,9 @@ using Nop.Services.Payments;
 using Nop.Services.Plugins;
 using Nop.Services.Tax;
 using Paytm;
+using System.Net.Http;
+using System.Text;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace Nop.Plugin.Payments.Paytm
 {
@@ -371,7 +374,7 @@ namespace Nop.Plugin.Payments.Paytm
             mid = _paytmPaymentSettings.MerchantId.Trim().ToString();
             mkey = _paytmPaymentSettings.MerchantKey.Trim().ToString();
             amount = postProcessPaymentRequest.Order.OrderTotal.ToString("0.00");
-            orderid = postProcessPaymentRequest.Order.Id.ToString();
+            orderid = postProcessPaymentRequest.Order.Id.ToString()+"_"+ new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
             parameters.Add("MID", _paytmPaymentSettings.MerchantId.Trim().ToString());
             parameters.Add("WEBSITE", _paytmPaymentSettings.Website.Trim().ToString());
             parameters.Add("CHANNEL_ID", "WEB");
@@ -394,6 +397,7 @@ namespace Nop.Plugin.Payments.Paytm
                          Checksum.generateSignature(parameters, _paytmPaymentSettings.MerchantKey));
             string domainname = _httpContextAccessor.HttpContext.Request.Host.Value;
             string txntoken = GetTxnToken(amount, mid, orderid, mkey);
+            //var txntoken = await GetTxnToken_new(amount, mid, orderid, mkey);
 
             await AddItemsParametersAsync(parameters, postProcessPaymentRequest);
 
@@ -413,6 +417,68 @@ namespace Nop.Plugin.Payments.Paytm
             _httpContextAccessor.HttpContext.Response.Redirect(absoluteUri);
         }
 
+        async Task<string> GetTxnToken_new(string amount, string mid, string orderid, string mkey)
+        {
+            APIResponse apiresponse = new APIResponse();
+            Dictionary<string, object> body = new Dictionary<string, object>();
+            Dictionary<string, string> head = new Dictionary<string, string>();
+            Dictionary<string, object> requestBody = new Dictionary<string, object>();
+
+            Dictionary<string, string> txnAmount = new Dictionary<string, string>();
+            string scheme = _httpContextAccessor.HttpContext.Request.Scheme;
+            string host = _httpContextAccessor.HttpContext.Request.Host.ToString();
+            string displayToken = string.Empty;
+            txnAmount.Add("value", amount);
+            txnAmount.Add("currency", "INR");
+            Dictionary<string, string> userInfo = new Dictionary<string, string>();
+            userInfo.Add("custId", "cust_" + orderid);
+            body.Add("requestType", "Payment");
+            body.Add("mid", mid);
+            body.Add("websiteName", _paytmPaymentSettings.Website.Trim().ToString());
+            body.Add("orderId", orderid);
+            body.Add("txnAmount", txnAmount);
+            body.Add("userInfo", userInfo);
+            body.Add("callbackUrl", string.Concat(scheme, "://", host, "/Plugins/PaymentPaytm/Return"));
+
+            /*
+            * Generate checksum by parameters we have in body
+            * Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys 
+            */
+
+            string paytmChecksum = Checksum.generateSignature(JsonConvert.SerializeObject(body), mkey);
+
+            head.Add("signature", paytmChecksum);
+
+            requestBody.Add("body", body);
+            requestBody.Add("head", head);
+
+            string post_data = JsonConvert.SerializeObject(requestBody);
+            string url = string.Empty;
+            if (_paytmPaymentSettings.env == "Stage")
+            {
+                //For  Staging
+                url = "https://securegw-stage.paytm.in/theia/api/v1/initiateTransaction?mid=" + mid + "&orderId=" + orderid + " ";
+            }
+            if (_paytmPaymentSettings.env == "Prod")
+            {
+                //For  Production 
+                url = "https://securegw.paytm.in/theia/api/v1/initiateTransaction?mid=" + mid + "&orderId=" + orderid + "";
+            }
+
+            var httpContent = new StringContent(post_data, Encoding.UTF8, "application/json");
+
+            var httpClient = new HttpClient();
+            var httpResponse = await httpClient.PostAsync(url, httpContent);
+            if (httpResponse != null)
+            {
+                var contents = await httpResponse.Content.ReadAsStringAsync();
+                apiresponse = JsonConvert.DeserializeObject<APIResponse>(contents);
+                JObject jObject = JObject.Parse(contents);
+                displayToken = jObject.SelectToken("body.txnToken").Value<string>();
+                return displayToken;
+            }
+            return null;
+        }
         private string GetTxnToken(string amount, string mid, string orderid, string mkey)
         {
             APIResponse apiresponse = new APIResponse();
@@ -427,7 +493,7 @@ namespace Nop.Plugin.Payments.Paytm
             txnAmount.Add("value", amount);
             txnAmount.Add("currency", "INR");
             Dictionary<string, string> userInfo = new Dictionary<string, string>();
-            userInfo.Add("custId", "cust_001");
+            userInfo.Add("custId", "cust_"+ orderid);
             body.Add("requestType", "Payment");
             body.Add("mid", mid);
             body.Add("websiteName", _paytmPaymentSettings.Website.Trim().ToString());
@@ -479,7 +545,7 @@ namespace Nop.Plugin.Payments.Paytm
                 apiresponse = JsonConvert.DeserializeObject<APIResponse>(responseData);
                 JObject jObject = JObject.Parse(responseData);
                 displayToken = jObject.SelectToken("body.txnToken").Value<string>();
-                //  Console.WriteLine(responseData);
+                  Console.WriteLine(responseData);
             }
 
             return displayToken;
