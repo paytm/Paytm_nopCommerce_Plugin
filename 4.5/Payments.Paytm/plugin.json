@@ -1,10 +1,10 @@
-﻿{
+{
   "Group": "Payment methods",
   "FriendlyName": "Paytm",
   "SystemName": "Payments.Paytm",
-  "Version": "1.71",
+  "Version": "1.72",
   "SupportedVersions": [ "4.50" ],
-  "Author": "nopCommerce team",
+  "Author": "Paytm team",
   "DisplayOrder": 0,
   "FileName": "Nop.Plugin.Payments.Paytm.dll",
   "Description": "This plugin allows paying with Paytm"
