@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Nop.Plugin.Payments.Paytm</id>
+    <version>1.0.0</version>
+    <authors>Nop Solutions, Ltd</authors>
+    <projectUrl>https://www.nopcommerce.com/</projectUrl>
+    <description>Package Description</description>
+    <copyright>Copyright © Nop Solutions, Ltd</copyright>
+    <repository type="Git" url="https://github.com/nopSolutions/nopCommerce" />
+    <dependencies>
+      <group targetFramework="net6.0">
+        <dependency id="Nop.Web.Framework" version="4.5.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <contentFiles>
+      <files include="any/net6.0/logo.png" buildAction="Content" />
+      <files include="any/net6.0/plugin.json" buildAction="Content" />
+      <files include="any/net6.0/Views/Configure.cshtml" buildAction="Content" />
+      <files include="any/net6.0/Views/PaymentInfo.cshtml" buildAction="Content" />
+      <files include="any/net6.0/Views/_ViewImports.cshtml" buildAction="Content" />
+      <files include="any/net6.0/Views/JSCheckoutView.cshtml" buildAction="Content" />
+    </contentFiles>
+  </metadata>
+  <files>
+    <file src="C:\Users\shubham.dahibhate\Downloads\nopCommerce_4.50.2_Source\src\Presentation\Nop.Web\Plugins\Payments.Paytm\Nop.Plugin.Payments.Paytm.dll" target="lib\net6.0\Nop.Plugin.Payments.Paytm.dll" />
+    <file src="C:\Users\shubham.dahibhate\Downloads\nopCommerce_4.50.2_Source\src\Plugins\Nop.Plugin.Payments.Paytm\logo.png" target="content\logo.png" />
+    <file src="C:\Users\shubham.dahibhate\Downloads\nopCommerce_4.50.2_Source\src\Plugins\Nop.Plugin.Payments.Paytm\logo.png" target="contentFiles\any\net6.0\logo.png" />
+    <file src="C:\Users\shubham.dahibhate\Downloads\nopCommerce_4.50.2_Source\src\Plugins\Nop.Plugin.Payments.Paytm\plugin.json" target="content\plugin.json" />
+    <file src="C:\Users\shubham.dahibhate\Downloads\nopCommerce_4.50.2_Source\src\Plugins\Nop.Plugin.Payments.Paytm\plugin.json" target="contentFiles\any\net6.0\plugin.json" />
+    <file src="C:\Users\shubham.dahibhate\Downloads\nopCommerce_4.50.2_Source\src\Plugins\Nop.Plugin.Payments.Paytm\Views\Configure.cshtml" target="content\Views\Configure.cshtml" />
+    <file src="C:\Users\shubham.dahibhate\Downloads\nopCommerce_4.50.2_Source\src\Plugins\Nop.Plugin.Payments.Paytm\Views\Configure.cshtml" target="contentFiles\any\net6.0\Views\Configure.cshtml" />
+    <file src="C:\Users\shubham.dahibhate\Downloads\nopCommerce_4.50.2_Source\src\Plugins\Nop.Plugin.Payments.Paytm\Views\PaymentInfo.cshtml" target="content\Views\PaymentInfo.cshtml" />
+    <file src="C:\Users\shubham.dahibhate\Downloads\nopCommerce_4.50.2_Source\src\Plugins\Nop.Plugin.Payments.Paytm\Views\PaymentInfo.cshtml" target="contentFiles\any\net6.0\Views\PaymentInfo.cshtml" />
+    <file src="C:\Users\shubham.dahibhate\Downloads\nopCommerce_4.50.2_Source\src\Plugins\Nop.Plugin.Payments.Paytm\Views\_ViewImports.cshtml" target="content\Views\_ViewImports.cshtml" />
+    <file src="C:\Users\shubham.dahibhate\Downloads\nopCommerce_4.50.2_Source\src\Plugins\Nop.Plugin.Payments.Paytm\Views\_ViewImports.cshtml" target="contentFiles\any\net6.0\Views\_ViewImports.cshtml" />
+    <file src="C:\Users\shubham.dahibhate\Downloads\nopCommerce_4.50.2_Source\src\Plugins\Nop.Plugin.Payments.Paytm\Views\JSCheckoutView.cshtml" target="content\Views\JSCheckoutView.cshtml" />
+    <file src="C:\Users\shubham.dahibhate\Downloads\nopCommerce_4.50.2_Source\src\Plugins\Nop.Plugin.Payments.Paytm\Views\JSCheckoutView.cshtml" target="contentFiles\any\net6.0\Views\JSCheckoutView.cshtml" />
+  </files>
+</package>

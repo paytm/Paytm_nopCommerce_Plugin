@@ -18,5 +18,9 @@ namespace Nop.Plugin.Payments.Paytm
         public bool AdditionalFeePercentage { get; set; }
         public string env { get; set; }
         public string webhook { get; set; }
+
+        public string EmiSubvention { get; set; }
+        public string BankOffers { get; set; }
+        public string DcEmi { get; set; }
     }
 }

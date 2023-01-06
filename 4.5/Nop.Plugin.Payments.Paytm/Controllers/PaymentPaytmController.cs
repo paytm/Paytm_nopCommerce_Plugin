@@ -112,6 +112,9 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
                     IndustryTypeId = paytmPaymentSettings.IndustryTypeId,
                     CallBackUrl = paytmPaymentSettings.CallBackUrl,
                     UseDefaultCallBack = paytmPaymentSettings.UseDefaultCallBack,
+                    EmiSubvention = paytmPaymentSettings.EmiSubvention,
+                    BankOffers = paytmPaymentSettings.BankOffers,
+                    DcEmi = paytmPaymentSettings.DcEmi,
                     PaymentUrl = "https://securegw-stage.paytm.in/order/process",
                     TxnStatusUrl = "https://securegw-stage.paytm.in/order/status",
                     env = paytmPaymentSettings.env,
@@ -129,6 +132,9 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
                     IndustryTypeId = paytmPaymentSettings.IndustryTypeId,
                     CallBackUrl = paytmPaymentSettings.CallBackUrl,
                     UseDefaultCallBack = paytmPaymentSettings.UseDefaultCallBack,
+                    EmiSubvention = paytmPaymentSettings.EmiSubvention,
+                    BankOffers = paytmPaymentSettings.BankOffers,
+                    DcEmi = paytmPaymentSettings.DcEmi,
                     PaymentUrl = "https://securegw.paytm.in/order/process",
                     TxnStatusUrl = "https://securegw.paytm.in/order/status",
                     env = paytmPaymentSettings.env,
@@ -149,6 +155,9 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
             model.env_OverrideForStore = await _settingService.SettingExistsAsync(paytmPaymentSettings, x => x.env, storeScope);
             model.PdtToken_OverrideForStore = await _settingService.SettingExistsAsync(paytmPaymentSettings, x => x.PdtToken, storeScope);
             model.webhook_OverrideForStore = await _settingService.SettingExistsAsync(paytmPaymentSettings, x => x.webhook, storeScope);
+            model.EmiSubvention_OverrideForStore = await _settingService.SettingExistsAsync(paytmPaymentSettings, x => x.EmiSubvention, storeScope);
+            model.BankOffers_OverrideForStore = await _settingService.SettingExistsAsync(paytmPaymentSettings, x => x.BankOffers, storeScope);
+            model.DcEmi_OverrideForStore = await _settingService.SettingExistsAsync(paytmPaymentSettings, x => x.DcEmi, storeScope);
             return View("~/Plugins/Payments.Paytm/Views/Configure.cshtml", model);
         }
         private string GetStatusUrl()
@@ -200,6 +209,9 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
             paytmPaymentSettings.env = model.env;
             paytmPaymentSettings.IndustryTypeId = model.IndustryTypeId;
             paytmPaymentSettings.Website = model.Website;
+            paytmPaymentSettings.EmiSubvention = model.EmiSubvention;
+            paytmPaymentSettings.BankOffers = model.BankOffers;
+            paytmPaymentSettings.DcEmi = model.DcEmi;
             if (model.env == "Stage")
             {
                 paytmPaymentSettings.PaymentUrl = "https://securegw-stage.paytm.in/order/process";
@@ -230,6 +242,10 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
             await _settingService.SaveSettingOverridablePerStoreAsync(paytmPaymentSettings, x => x.env, model.env_OverrideForStore, storeScope, false);
             await _settingService.SaveSettingOverridablePerStoreAsync(paytmPaymentSettings, x => x.CallBackUrl, model.CallBackUrl_OverrideForStore, storeScope, false);
             await _settingService.SaveSettingOverridablePerStoreAsync(paytmPaymentSettings, x => x.webhook, model.webhook_OverrideForStore, storeScope, false);
+            await _settingService.SaveSettingOverridablePerStoreAsync(paytmPaymentSettings, x => x.EmiSubvention, model.EmiSubvention_OverrideForStore, storeScope, false);
+            await _settingService.SaveSettingOverridablePerStoreAsync(paytmPaymentSettings, x => x.BankOffers, model.BankOffers_OverrideForStore, storeScope, false);
+            await _settingService.SaveSettingOverridablePerStoreAsync(paytmPaymentSettings, x => x.DcEmi, model.DcEmi_OverrideForStore, storeScope, false);
+            ;
             //now clear settings cache
             await _settingService.ClearCacheAsync();
 

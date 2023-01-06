@@ -56,8 +56,8 @@
   <Target Name="NopTarget" AfterTargets="Build">
     <!-- Delete unnecessary libraries from plugins path -->
     <MSBuild Projects="@(ClearPluginAssemblies)" Properties="PluginPath=$(MSBuildProjectDirectory)\$(OutDir)" Targets="NopClear" />
-  </Target>  
-  
+  </Target>
+
   <ItemGroup>
     <Reference Include="Paytm">
       <HintPath>dll\Paytm.dll</HintPath>
