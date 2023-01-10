@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Nop.Core;
@@ -103,6 +104,9 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
                     IndustryTypeId = PaytmPaymentSettings.IndustryTypeId,
                     CallBackUrl = PaytmPaymentSettings.CallBackUrl,
                     UseDefaultCallBack = PaytmPaymentSettings.UseDefaultCallBack,
+                    EmiSubvention = PaytmPaymentSettings.EmiSubvention,
+                    BankOffers = PaytmPaymentSettings.BankOffers,
+                    DcEmi = PaytmPaymentSettings.DcEmi,
                     PaymentUrl = "https://securegw-stage.paytm.in/order/process",
                     TxnStatusUrl = "https://securegw-stage.paytm.in/order/status",
                     env = PaytmPaymentSettings.env,
@@ -119,6 +123,9 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
                     IndustryTypeId = PaytmPaymentSettings.IndustryTypeId,
                     CallBackUrl = PaytmPaymentSettings.CallBackUrl,
                     UseDefaultCallBack = PaytmPaymentSettings.UseDefaultCallBack,
+                    EmiSubvention = PaytmPaymentSettings.EmiSubvention,
+                    BankOffers = PaytmPaymentSettings.BankOffers,
+                    DcEmi = PaytmPaymentSettings.DcEmi,
                     PaymentUrl = "https://securegw.paytm.in/order/process",
                     TxnStatusUrl = "https://securegw.paytm.in/order/status",
                     env = PaytmPaymentSettings.env,
@@ -137,6 +144,9 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
             model.UseDefaultCallBack_OverrideForStore = await _settingService.SettingExistsAsync(PaytmPaymentSettings, x => x.UseDefaultCallBack, storeScope);
             model.env_OverrideForStore = await _settingService.SettingExistsAsync(PaytmPaymentSettings, x => x.env, storeScope);
             model.PdtToken_OverrideForStore = await _settingService.SettingExistsAsync(PaytmPaymentSettings, x => x.PdtToken, storeScope);
+            model.EmiSubvention_OverrideForStore = await _settingService.SettingExistsAsync(PaytmPaymentSettings, x => x.EmiSubvention, storeScope);
+            model.BankOffers_OverrideForStore = await _settingService.SettingExistsAsync(PaytmPaymentSettings, x => x.BankOffers, storeScope);
+            model.DcEmi_OverrideForStore = await _settingService.SettingExistsAsync(PaytmPaymentSettings, x => x.DcEmi, storeScope);
             return View("~/Plugins/Payments.Paytm/Views/Configure.cshtml", model);
         }
         private string GetStatusUrl()
@@ -188,6 +198,9 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
             PaytmPaymentSettings.env = model.env;
             PaytmPaymentSettings.IndustryTypeId = model.IndustryTypeId;
             PaytmPaymentSettings.Website = model.Website;
+            PaytmPaymentSettings.EmiSubvention = model.EmiSubvention;
+            PaytmPaymentSettings.BankOffers = model.BankOffers;
+            PaytmPaymentSettings.DcEmi = model.DcEmi;
             if (model.env == "Stage")
             {
                 PaytmPaymentSettings.PaymentUrl = "https://securegw-stage.paytm.in/order/process";
@@ -215,7 +228,10 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
             await _settingService.SaveSettingOverridablePerStoreAsync(PaytmPaymentSettings, x => x.IndustryTypeId, model.IndustryTypeId_OverrideForStore, storeScope, false);
             await _settingService.SaveSettingOverridablePerStoreAsync(PaytmPaymentSettings, x => x.env, model.env_OverrideForStore, storeScope, false);
             await _settingService.SaveSettingOverridablePerStoreAsync(PaytmPaymentSettings, x => x.CallBackUrl, model.CallBackUrl_OverrideForStore, storeScope, false);
-           
+            await _settingService.SaveSettingOverridablePerStoreAsync(PaytmPaymentSettings, x => x.EmiSubvention, model.EmiSubvention_OverrideForStore, storeScope, false);
+            await _settingService.SaveSettingOverridablePerStoreAsync(PaytmPaymentSettings, x => x.BankOffers, model.BankOffers_OverrideForStore, storeScope, false);
+            await _settingService.SaveSettingOverridablePerStoreAsync(PaytmPaymentSettings, x => x.DcEmi, model.DcEmi_OverrideForStore, storeScope, false);
+
             //now clear settings cache
             await _settingService.ClearCacheAsync();
 
@@ -235,7 +251,7 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
 
 
             var myUtility = new PaytmHelper();
-            string orderId, amount, authDesc, resCode;
+            string orderId, amount, authDesc, resCode, orderIdRaw;
             bool checkSumMatch = false;
             //Assign following values to send it to verifychecksum function.
             if (String.IsNullOrWhiteSpace(_paytmPaymentSettings.MerchantKey))
@@ -274,7 +290,8 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
                 }
             }
 
-            orderId = parameters["ORDERID"];
+            orderIdRaw = parameters["ORDERID"];
+            orderId = Regex.Replace(orderIdRaw, @"_.*", "");
             amount = parameters["TXNAMOUNT"];
             resCode = parameters["RESPCODE"];
             authDesc = parameters["STATUS"];
@@ -287,7 +304,7 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
                 {
                     if (resCode == "01" && authDesc == "TXN_SUCCESS")
                     {
-                        if (TxnStatus(orderId, order.OrderTotal.ToString("0.00")))
+                        if (TxnStatus(orderIdRaw, order.OrderTotal.ToString("0.00")))
                         {
                             if (_orderProcessingService.CanMarkOrderAsPaid(order))
                             {

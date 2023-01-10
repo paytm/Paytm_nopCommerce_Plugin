@@ -41,6 +41,16 @@ namespace Nop.Plugin.Payments.Paytm.Models
         public string PdtToken { get; set; }
         public bool PdtToken_OverrideForStore { get; set; }
 
-       
+        [NopResourceDisplayName("Plugins.Payments.Paytm.Fields.EmiSubvention")]
+        public string EmiSubvention { get; set; }
+        public bool EmiSubvention_OverrideForStore { get; set; }
+
+        [NopResourceDisplayName("Plugins.Payments.Paytm.Fields.BankOffers")]
+        public string BankOffers { get; set; }
+        public bool BankOffers_OverrideForStore { get; set; }
+
+        [NopResourceDisplayName("Plugins.Payments.Paytm.Fields.DcEmi")]
+        public string DcEmi { get; set; }
+        public bool DcEmi_OverrideForStore { get; set; }
     }
 }

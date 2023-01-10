@@ -147,7 +147,8 @@ namespace Nop.Plugin.Payments.Paytm
                 ["state"] = (await _stateProvinceService.GetStateProvinceByAddressAsync(orderAddress))?.Abbreviation,
                 ["country"] = (await _countryService.GetCountryByAddressAsync(orderAddress))?.TwoLetterIsoCode,
                 ["zip"] = orderAddress?.ZipPostalCode,
-                ["email"] = orderAddress?.Email
+                ["email"] = orderAddress?.Email,
+                ["phone"] = orderAddress?.PhoneNumber
             };
         }
 
@@ -371,11 +372,13 @@ namespace Nop.Plugin.Payments.Paytm
             //{
                 //add order items query parameters to the request
                 var parameters = new Dictionary<string, string>(queryParameters);
-            string mid, mkey, amount, orderid;
+            string mid, mkey, amount, orderid, phoneno, custid;
             mid = _PaytmPaymentSettings.MerchantId.Trim().ToString();
             mkey = _PaytmPaymentSettings.MerchantKey.Trim().ToString();
             amount = postProcessPaymentRequest.Order.OrderTotal.ToString("0.00");
-            orderid = postProcessPaymentRequest.Order.Id.ToString();
+            orderid = postProcessPaymentRequest.Order.Id.ToString() + "_" + new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
+            phoneno = parameters["phone"];
+            custid = postProcessPaymentRequest.Order.CustomerId.ToString();
             parameters.Add("MID", _PaytmPaymentSettings.MerchantId.Trim().ToString());
             parameters.Add("WEBSITE", _PaytmPaymentSettings.Website.Trim().ToString());
             parameters.Add("CHANNEL_ID", "WEB");
@@ -397,7 +400,7 @@ namespace Nop.Plugin.Payments.Paytm
             parameters.Add("CHECKSUMHASH",
                          Checksum.generateSignature(parameters, _PaytmPaymentSettings.MerchantKey));
             string domainname = _httpContextAccessor.HttpContext.Request.Host.Value;
-            string txntoken = GetTxnToken(amount, mid, orderid, mkey);
+            string txntoken = GetTxnToken(amount, mid, orderid, mkey, phoneno, custid);
 
             await AddItemsParametersAsync(parameters, postProcessPaymentRequest);
 
@@ -417,7 +420,7 @@ namespace Nop.Plugin.Payments.Paytm
             _httpContextAccessor.HttpContext.Response.Redirect(absoluteUri);
            
         }
-        private string GetTxnToken(string amount, string mid, string orderid, string mkey)
+        private string GetTxnToken(string amount, string mid, string orderid, string mkey, string phoneno, string custid)
         {
             APIResponse apiresponse = new APIResponse();
             Dictionary<string, object> body = new Dictionary<string, object>();
@@ -428,10 +431,37 @@ namespace Nop.Plugin.Payments.Paytm
             string scheme = _httpContextAccessor.HttpContext.Request.Scheme;
             string host = _httpContextAccessor.HttpContext.Request.Host.ToString();
             string displayToken = string.Empty;
+            string offerId;
             txnAmount.Add("value", amount);
             txnAmount.Add("currency", "INR");
             Dictionary<string, string> userInfo = new Dictionary<string, string>();
-            userInfo.Add("custId", "cust_001");
+            Dictionary<string, bool> simplifiedPaymentOffers = new Dictionary<string, bool>();
+            Dictionary<string, object> simplifiedSubvention = new Dictionary<string, object>();
+            Dictionary<string, object> offerDetails = new Dictionary<string, object>();
+            //userInfo.Add("custId", "cust_001");
+            userInfo.Add("custId", custid);
+            //for bank offers
+            if (_PaytmPaymentSettings.BankOffers.Trim().ToString() == "Yes")
+            {
+                simplifiedPaymentOffers.Add("applyAvailablePromo", true);
+                body.Add("simplifiedPaymentOffers", simplifiedPaymentOffers);
+            }
+            // for emi subvention
+            if (_PaytmPaymentSettings.EmiSubvention.Trim().ToString() == "Yes")
+            {
+                simplifiedSubvention.Add("customerId", custid);
+                simplifiedSubvention.Add("subventionAmount", amount);
+                simplifiedSubvention.Add("selectPlanOnCashierPage", bool.TrueString);
+                offerId = Convert.ToString(1);
+                offerDetails.Add("offerId", offerId);
+                simplifiedSubvention.Add("offerDetails", offerDetails);
+                body.Add("simplifiedSubvention", simplifiedSubvention);
+            }
+            //for DC EMI
+            if (_PaytmPaymentSettings.DcEmi.Trim().ToString() == "Yes")
+            {
+                userInfo.Add("mobile", phoneno);
+            }
             body.Add("requestType", "Payment");
             body.Add("mid", mid);
             body.Add("websiteName", _PaytmPaymentSettings.Website.Trim().ToString());

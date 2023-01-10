@@ -363,11 +363,15 @@ namespace Nop.Plugin.Payments.Paytm
         public void PostProcessPayment(PostProcessPaymentRequest postProcessPaymentRequest)
         {
             var queryParameters = new Dictionary<string, string>();
-            string mid, mkey, amount,orderid;
+            //choosing correct order address
+            var orderAddress = _addressService.GetAddressById(
+                (postProcessPaymentRequest.Order.PickupInStore ? postProcessPaymentRequest.Order.PickupAddressId : postProcessPaymentRequest.Order.ShippingAddressId) ?? 0);
+            string mid, mkey, amount, orderid, phoneno;
             mid = _paytmPaymentSettings.MerchantId.Trim().ToString();
             mkey = _paytmPaymentSettings.MerchantKey.Trim().ToString();
             amount = postProcessPaymentRequest.Order.OrderTotal.ToString("0.00");
-            orderid = postProcessPaymentRequest.Order.Id.ToString();
+            orderid = postProcessPaymentRequest.Order.Id.ToString() + "_" + new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
+            phoneno = orderAddress.PhoneNumber;
             queryParameters.Add("MID", _paytmPaymentSettings.MerchantId.Trim().ToString());
             queryParameters.Add("WEBSITE", _paytmPaymentSettings.Website.Trim().ToString());
             queryParameters.Add("CHANNEL_ID", "WEB");
@@ -389,7 +393,7 @@ namespace Nop.Plugin.Payments.Paytm
             queryParameters.Add("CHECKSUMHASH",
                          Checksum.generateSignature(queryParameters, _paytmPaymentSettings.MerchantKey));
             string domainname = _httpContextAccessor.HttpContext.Request.Host.Value;
-            string txntoken = GetTxnToken(amount,mid,orderid,mkey);
+            string txntoken = GetTxnToken(amount,mid,orderid,mkey,phoneno);
            // string test = _webHelper.GetStoreLocation(false);
            queryParameters = queryParameters.Where(parameter => !string.IsNullOrEmpty(parameter.Value))
                 .ToDictionary(parameter => parameter.Key, parameter => parameter.Value);
@@ -406,7 +410,7 @@ namespace Nop.Plugin.Payments.Paytm
             _httpContextAccessor.HttpContext.Response.Redirect(absoluteUri);
         }
 
-        private string GetTxnToken(string amount,string mid,string orderid,string mkey )
+        private string GetTxnToken(string amount,string mid,string orderid,string mkey, string phoneno)
         {
             APIResponse apiresponse = new APIResponse();
             Dictionary<string, object> body = new Dictionary<string, object>();
@@ -421,6 +425,7 @@ namespace Nop.Plugin.Payments.Paytm
             txnAmount.Add("currency", "INR");
             Dictionary<string, string> userInfo = new Dictionary<string, string>();
             userInfo.Add("custId", "cust_001");
+            userInfo.Add("mobile", phoneno);
             body.Add("requestType", "Payment");
             body.Add("mid", mid);
             body.Add("websiteName", _paytmPaymentSettings.Website.Trim().ToString());

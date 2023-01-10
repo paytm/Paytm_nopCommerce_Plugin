@@ -24,6 +24,7 @@ using System.Net;
 using Microsoft.AspNetCore.Http;
 using Paytm;
 using System.Web;
+using System.Text.RegularExpressions;
 
 namespace Nop.Plugin.Payments.Paytm.Controllers
 {
@@ -408,7 +409,7 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
 
 
             var myUtility = new PaytmHelper();
-            string orderId, amount, authDesc, resCode;
+            string orderId, amount, authDesc, resCode, orderIdRaw;
             bool checkSumMatch = false;
             //Assign following values to send it to verifychecksum function.
             if (String.IsNullOrWhiteSpace(_paytmPaymentSettings.MerchantKey))
@@ -451,7 +452,8 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
                 }
             }
 
-            orderId = parameters["ORDERID"];
+            orderIdRaw = parameters["ORDERID"];
+            orderId = Regex.Replace(orderIdRaw, @"_.*", "");
             amount = parameters["TXNAMOUNT"];
             resCode = parameters["RESPCODE"];
             authDesc = parameters["STATUS"];
@@ -461,7 +463,7 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
             {
                 if (resCode == "01" && authDesc == "TXN_SUCCESS")
                 {
-                    if (TxnStatus(orderId, order.OrderTotal.ToString("0.00")))
+                    if (TxnStatus(orderIdRaw, order.OrderTotal.ToString("0.00")))
                     {
                         if (_orderProcessingService.CanMarkOrderAsPaid(order))
                         {
