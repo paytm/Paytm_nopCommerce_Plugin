@@ -1,0 +1,468 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Plugins\\Nop.Plugin.Payments.Paytm\\Nop.Plugin.Payments.Paytm.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Libraries\\Nop.Core\\Nop.Core.csproj": {
+      "version": "4.5.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Libraries\\Nop.Core\\Nop.Core.csproj",
+        "projectName": "Nop.Core",
+        "projectPath": "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Libraries\\Nop.Core\\Nop.Core.csproj",
+        "packagesPath": "C:\\Users\\shubham.dahibhate\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Libraries\\Nop.Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\shubham.dahibhate\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.0, )"
+            },
+            "Autofac.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Azure.Extensions.AspNetCore.DataProtection.Blobs": {
+              "target": "Package",
+              "version": "[1.2.3, )"
+            },
+            "Azure.Extensions.AspNetCore.DataProtection.Keys": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
+            "Azure.Identity": {
+              "target": "Package",
+              "version": "[1.8.0, )"
+            },
+            "Humanizer": {
+              "target": "Package",
+              "version": "[2.14.1, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
+            "Microsoft.Azure.Services.AppAuthentication": {
+              "target": "Package",
+              "version": "[1.6.2, )"
+            },
+            "Microsoft.Extensions.Caching.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
+            "Microsoft.Extensions.Caching.StackExchangeRedis": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
+            "MiniProfiler.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[4.2.22, )"
+            },
+            "Nito.AsyncEx.Coordination": {
+              "target": "Package",
+              "version": "[5.1.2, )"
+            },
+            "System.IO.FileSystem.AccessControl": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "System.Linq.Async": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Libraries\\Nop.Data\\Nop.Data.csproj": {
+      "version": "4.5.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Libraries\\Nop.Data\\Nop.Data.csproj",
+        "projectName": "Nop.Data",
+        "projectPath": "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Libraries\\Nop.Data\\Nop.Data.csproj",
+        "packagesPath": "C:\\Users\\shubham.dahibhate\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Libraries\\Nop.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\shubham.dahibhate\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Libraries\\Nop.Core\\Nop.Core.csproj": {
+                "projectPath": "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Libraries\\Nop.Core\\Nop.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "FluentMigrator": {
+              "target": "Package",
+              "version": "[3.3.2, )"
+            },
+            "FluentMigrator.Runner": {
+              "target": "Package",
+              "version": "[3.3.2, )"
+            },
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[5.0.1, )"
+            },
+            "MySqlConnector": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "System.Configuration.ConfigurationManager": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "System.Net.NameResolution": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "linq2db": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Libraries\\Nop.Services\\Nop.Services.csproj": {
+      "version": "4.5.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Libraries\\Nop.Services\\Nop.Services.csproj",
+        "projectName": "Nop.Services",
+        "projectPath": "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Libraries\\Nop.Services\\Nop.Services.csproj",
+        "packagesPath": "C:\\Users\\shubham.dahibhate\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Libraries\\Nop.Services\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\shubham.dahibhate\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Libraries\\Nop.Core\\Nop.Core.csproj": {
+                "projectPath": "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Libraries\\Nop.Core\\Nop.Core.csproj"
+              },
+              "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Libraries\\Nop.Data\\Nop.Data.csproj": {
+                "projectPath": "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Libraries\\Nop.Data\\Nop.Data.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Azure.Storage.Blobs": {
+              "target": "Package",
+              "version": "[12.14.1, )"
+            },
+            "ClosedXML": {
+              "target": "Package",
+              "version": "[0.97.0, )"
+            },
+            "HarfBuzzSharp.NativeAssets.Linux": {
+              "target": "Package",
+              "version": "[2.8.2.3, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[3.4.3, )"
+            },
+            "MaxMind.GeoIP2": {
+              "target": "Package",
+              "version": "[5.1.0, )"
+            },
+            "QuestPDF": {
+              "target": "Package",
+              "version": "[2022.11.0, )"
+            },
+            "SkiaSharp": {
+              "target": "Package",
+              "version": "[2.88.3, )"
+            },
+            "SkiaSharp.NativeAssets.Linux.NoDependencies": {
+              "target": "Package",
+              "version": "[2.88.3, )"
+            },
+            "Svg.Skia": {
+              "target": "Package",
+              "version": "[0.5.18, )"
+            },
+            "System.Linq.Dynamic.Core": {
+              "target": "Package",
+              "version": "[1.2.23, )"
+            },
+            "System.ServiceModel.Http": {
+              "target": "Package",
+              "version": "[4.10.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Plugins\\Nop.Plugin.Payments.Paytm\\Nop.Plugin.Payments.Paytm.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Plugins\\Nop.Plugin.Payments.Paytm\\Nop.Plugin.Payments.Paytm.csproj",
+        "projectName": "Nop.Plugin.Payments.Paytm",
+        "projectPath": "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Plugins\\Nop.Plugin.Payments.Paytm\\Nop.Plugin.Payments.Paytm.csproj",
+        "packagesPath": "C:\\Users\\shubham.dahibhate\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Plugins\\Nop.Plugin.Payments.Paytm\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\shubham.dahibhate\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Presentation\\Nop.Web.Framework\\Nop.Web.Framework.csproj": {
+                "projectPath": "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Presentation\\Nop.Web.Framework\\Nop.Web.Framework.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Presentation\\Nop.Web.Framework\\Nop.Web.Framework.csproj": {
+      "version": "4.5.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Presentation\\Nop.Web.Framework\\Nop.Web.Framework.csproj",
+        "projectName": "Nop.Web.Framework",
+        "projectPath": "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Presentation\\Nop.Web.Framework\\Nop.Web.Framework.csproj",
+        "packagesPath": "C:\\Users\\shubham.dahibhate\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Presentation\\Nop.Web.Framework\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\shubham.dahibhate\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Libraries\\Nop.Core\\Nop.Core.csproj": {
+                "projectPath": "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Libraries\\Nop.Core\\Nop.Core.csproj"
+              },
+              "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Libraries\\Nop.Data\\Nop.Data.csproj": {
+                "projectPath": "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Libraries\\Nop.Data\\Nop.Data.csproj"
+              },
+              "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Libraries\\Nop.Services\\Nop.Services.csproj": {
+                "projectPath": "C:\\Users\\shubham.dahibhate\\Downloads\\nopcommerce 4.6\\nopCommerce_4.60.2_Source\\src\\Libraries\\Nop.Services\\Nop.Services.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[11.2.2, )"
+            },
+            "LigerShark.WebOptimizer.Core": {
+              "target": "Package",
+              "version": "[3.0.372, )"
+            },
+            "WebMarkupMin.AspNetCore7": {
+              "target": "Package",
+              "version": "[2.13.5, )"
+            },
+            "WebMarkupMin.NUglify": {
+              "target": "Package",
+              "version": "[2.13.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
