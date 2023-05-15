@@ -1,0 +1,197 @@
+﻿@model Nop.Plugin.Payments.Paytm.Models.ConfigurationModel
+@inject Nop.Core.IWebHelper webHelper
+@{
+    Layout = "_ConfigurePlugin";
+}
+
+<form asp-controller="PaymentPaytm" asp-action="Configure" method="post">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                <div class="form-group row">
+                    <div class=" col-md-3">
+                        <div class="label-wrapper">
+                            <label class="control-label" for="Environment">Environment</label>
+                            <div title="Select Environment" data-toggle="tooltip" class="ico-help">
+
+                                <i class="fa fa-question-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(m => m.env, new List<SelectListItem>
+                        {
+                        new SelectListItem{Text="Test/Staging",Value="Stage"},
+                        new SelectListItem{Text="Production",Value="Prod"}
+                        }, new { @class = "form-control text-box single-line" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <div class="label-wrapper">
+                            <label class="control-label" for="MerchantId">Test/Production MID</label>
+                            <div title="Enter Test/Production MID" data-toggle="tooltip" class="ico-help"><i class="fa fa-question-circle"></i></div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="MerchantId" />
+                        <span asp-validation-for="MerchantId"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <div class="label-wrapper">
+                            <label class="control-label" for="MerchantKey">Test/Production Secret Key</label>
+                            <div title="Enter Test/Production Secret Key" data-toggle="tooltip" class="ico-help"><i class="fa fa-question-circle"></i></div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="MerchantKey" />
+                        <span asp-validation-for="MerchantKey"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <div class="label-wrapper">
+                            <label class="control-label" for="Website">Website (Provided by Paytm)</label>
+                            <div title="Enter Website (Provided by Paytm)" data-toggle="tooltip" class="ico-help"><i class="fa fa-question-circle"></i></div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="Website" />
+                        <span asp-validation-for="Website"></span>
+                    </div>
+                </div>
+            <!--    <div class="form-group row">
+                    <div class="col-md-3">
+                        <div class="label-wrapper">
+                            <label class="control-label" for="IndustryTypeId">Industry Type Id</label>
+                            <div title="Enter Industry Type Id" data-toggle="tooltip" class="ico-help"><i class="fa fa-question-circle"></i></div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-9">
+                        <nop-editor asp-for="IndustryTypeId" />
+                        <span asp-validation-for="IndustryTypeId"></span>
+                    </div>
+                </div>  -->
+
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <div class="label-wrapper">
+                            <label class="control-label" for="webhook">Webhook Url</label>
+                            <div title="Webhook Url" data-toggle="tooltip" class="ico-help"><i class="fa fa-question-circle"></i></div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-9">
+
+                        <label class="control-label" for="webhook">
+                            @Html.Label(Model.webhook)
+                            @*<nop-editor asp-for="webhook" />*@
+                            @*<span asp-validation-for="webhook"></span>*@
+                        </label>
+
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class=" col-md-3">
+                        <div class="label-wrapper">
+                            <label class="control-label" for="BankOffers">Enable Bank Offers</label>
+                            <div title="Select 'Yes' to provide Bank Offer to your customers." data-toggle="tooltip" class="ico-help">
+
+                                <i class="fa fa-question-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(m => m.BankOffers, new List<SelectListItem>
+                        {
+                        new SelectListItem{Text="No",Value="No"},
+                        new SelectListItem{Text="Yes",Value="Yes"}
+                        }, new { @class = "form-control text-box single-line" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class=" col-md-3">
+                        <div class="label-wrapper">
+                            <label class="control-label" for="DcEmi">Enable DC EMI</label>
+                            <div title="select 'Yes' to offer DC EMI to your customer. Customer mobile number is mandatory for DC EMI." data-toggle="tooltip" class="ico-help">
+
+                                <i class="fa fa-question-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(m => m.DcEmi, new List<SelectListItem>
+                        {
+                        new SelectListItem{Text="No",Value="No"},
+                        new SelectListItem{Text="Yes",Value="Yes"}
+                        }, new { @class = "form-control text-box single-line" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class=" col-md-3">
+                        <div class="label-wrapper">
+                            <label class="control-label" for="EmiSubvention">Enable EMI Subvention</label>
+                            <div title="select 'Yes' to offer EMI Subvention to your customers." data-toggle="tooltip" class="ico-help">
+
+                                <i class="fa fa-question-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(m => m.EmiSubvention, new List<SelectListItem>
+                        {
+                        new SelectListItem{Text="No",Value="No"},
+                        new SelectListItem{Text="Yes",Value="Yes"}
+                        }, new { @class = "form-control text-box single-line" })
+                    </div>
+                </div>
+
+                <div class="form-group" hidden="hidden">
+                    <div class="col-md-3">
+                        <div class="label-wrapper">
+                            <label class="control-label" for="CallbackUrl">Call Back Url</label>
+                            <div title="Enter Call Back Url" data-toggle="tooltip" class="ico-help"><i class="fa fa-question-circle"></i></div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-9" hidden="hidden">
+                        <nop-editor asp-for="CallBackUrl" />
+                        <span asp-validation-for="CallBackUrl"></span>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <div class="label-wrapper">
+                            <label class="control-label" for="UseDefaultCallBack">Use Default Call Back</label>
+                            <div title="Select Use Default Call Back" data-toggle="tooltip" class="ico-help"><i class="fa fa-question-circle"></i></div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="UseDefaultCallBack" />
+                        <span asp-validation-for="UseDefaultCallBack"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-9 offset-md-3">
+                        <input type="submit" name="save" class="btn btn-primary" value="@T("Admin.Common.Save")" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
