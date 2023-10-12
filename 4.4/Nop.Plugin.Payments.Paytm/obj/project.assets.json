@@ -14039,19 +14039,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\shubham.dahibhate\\.nuget\\packages\\": {}
+    "C:\\Users\\Shubham\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\shubham.dahibhate\\Desktop\\NP4.4\\nopCommerce_4.40.4_Source\\Plugins\\Nop.Plugin.Payments.Paytm\\Nop.Plugin.Payments.Paytm.csproj",
+      "projectUniqueName": "C:\\Users\\Shubham\\Downloads\\nopCommerce_4.40.4_Source\\Plugins\\Nop.Plugin.Payments.Paytm\\Nop.Plugin.Payments.Paytm.csproj",
       "projectName": "Nop.Plugin.Payments.Paytm",
-      "projectPath": "C:\\Users\\shubham.dahibhate\\Desktop\\NP4.4\\nopCommerce_4.40.4_Source\\Plugins\\Nop.Plugin.Payments.Paytm\\Nop.Plugin.Payments.Paytm.csproj",
-      "packagesPath": "C:\\Users\\shubham.dahibhate\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\shubham.dahibhate\\Desktop\\NP4.4\\nopCommerce_4.40.4_Source\\Plugins\\Nop.Plugin.Payments.Paytm\\obj\\",
+      "projectPath": "C:\\Users\\Shubham\\Downloads\\nopCommerce_4.40.4_Source\\Plugins\\Nop.Plugin.Payments.Paytm\\Nop.Plugin.Payments.Paytm.csproj",
+      "packagesPath": "C:\\Users\\Shubham\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Shubham\\Downloads\\nopCommerce_4.40.4_Source\\Plugins\\Nop.Plugin.Payments.Paytm\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\shubham.dahibhate\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Shubham\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -14065,8 +14065,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\shubham.dahibhate\\Desktop\\NP4.4\\nopCommerce_4.40.4_Source\\Presentation\\Nop.Web.Framework\\Nop.Web.Framework.csproj": {
-              "projectPath": "C:\\Users\\shubham.dahibhate\\Desktop\\NP4.4\\nopCommerce_4.40.4_Source\\Presentation\\Nop.Web.Framework\\Nop.Web.Framework.csproj"
+            "C:\\Users\\Shubham\\Downloads\\nopCommerce_4.40.4_Source\\Presentation\\Nop.Web.Framework\\Nop.Web.Framework.csproj": {
+              "projectPath": "C:\\Users\\Shubham\\Downloads\\nopCommerce_4.40.4_Source\\Presentation\\Nop.Web.Framework\\Nop.Web.Framework.csproj"
             }
           }
         }
@@ -14096,7 +14096,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

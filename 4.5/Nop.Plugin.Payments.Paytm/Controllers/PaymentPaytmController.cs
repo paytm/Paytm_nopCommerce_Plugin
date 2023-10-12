@@ -115,8 +115,8 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
                     EmiSubvention = paytmPaymentSettings.EmiSubvention,
                     BankOffers = paytmPaymentSettings.BankOffers,
                     DcEmi = paytmPaymentSettings.DcEmi,
-                    PaymentUrl = "https://securegw-stage.paytm.in/order/process",
-                    TxnStatusUrl = "https://securegw-stage.paytm.in/order/status",
+                    PaymentUrl = PaytmPaymentProcessor.STAGING_HOST + PaytmPaymentProcessor.ORDER_PROCESS_URL,
+                    TxnStatusUrl = PaytmPaymentProcessor.STAGING_HOST + PaytmPaymentProcessor.ORDER_STATUS_URL,
                     env = paytmPaymentSettings.env,
                     webhook = string.Concat(scheme, "://", host, "/Plugins/PaymentPaytm/Webhook"),
                     ActiveStoreScopeConfiguration = storeScope
@@ -124,6 +124,17 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
             }
             else
             {
+                String PaymentUrl = PaytmPaymentProcessor.PRODUCTION_HOST + PaytmPaymentProcessor.ORDER_PROCESS_URL;
+                String TxnStatusUrl = PaytmPaymentProcessor.PRODUCTION_HOST + PaytmPaymentProcessor.ORDER_STATUS_URL;
+                if (PaytmPaymentProcessor.PPBL == true)
+                {
+                    int midLength = Regex.Replace(paytmPaymentSettings.MerchantId, "[^A-Za-z]", "").Length;
+                    if (midLength == 7)
+                    {
+                        PaymentUrl = PaytmPaymentProcessor.PRODUCTION_HOST_PPBL + PaytmPaymentProcessor.ORDER_PROCESS_URL;
+                        TxnStatusUrl = PaytmPaymentProcessor.PRODUCTION_HOST_PPBL + PaytmPaymentProcessor.ORDER_STATUS_URL;
+                    }
+                }                                
                 model = new ConfigurationModel
                 {
                     MerchantId = paytmPaymentSettings.MerchantId,
@@ -135,8 +146,8 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
                     EmiSubvention = paytmPaymentSettings.EmiSubvention,
                     BankOffers = paytmPaymentSettings.BankOffers,
                     DcEmi = paytmPaymentSettings.DcEmi,
-                    PaymentUrl = "https://securegw.paytm.in/order/process",
-                    TxnStatusUrl = "https://securegw.paytm.in/order/status",
+                    PaymentUrl = PaymentUrl,
+                    TxnStatusUrl = TxnStatusUrl,
                     env = paytmPaymentSettings.env,
                     webhook = string.Concat(scheme, "://", host, "/Plugins/PaymentPaytm/Webhook"),
                     ActiveStoreScopeConfiguration = storeScope
@@ -165,11 +176,19 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
             string url = string.Empty;
             if (_paytmPaymentSettings.env == "Stage")
             {
-                url = "https://securegw-stage.paytm.in/order/status";
+                url = PaytmPaymentProcessor.STAGING_HOST + PaytmPaymentProcessor.ORDER_STATUS_URL;
             }
             else
             {
-                url = "https://securegw.paytm.in/order/status";
+                url = PaytmPaymentProcessor.PRODUCTION_HOST + PaytmPaymentProcessor.ORDER_STATUS_URL;
+                if (PaytmPaymentProcessor.PPBL == true)
+                {
+                    int midLength = Regex.Replace(_paytmPaymentSettings.MerchantId, "[^A-Za-z]", "").Length;
+                    if (midLength == 7)
+                    {
+                        url = PaytmPaymentProcessor.PRODUCTION_HOST_PPBL + PaytmPaymentProcessor.ORDER_STATUS_URL;
+                    }
+                }
             }
             return _paytmPaymentSettings.TxnStatusUrl = url;
         }
@@ -182,7 +201,22 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
             ViewData["txntoken"] = Request.Cookies["token"];
             ViewData["amount"] = Request.Cookies["amount"];
             ViewData["mid"] = Request.Cookies["mid"];
-
+            if (_paytmPaymentSettings.env == "Prod")
+            {
+                ViewData["checkoutJsUrl"] = PaytmPaymentProcessor.PRODUCTION_HOST + PaytmPaymentProcessor.CHECKOUT_JS_URL;
+                if(PaytmPaymentProcessor.PPBL == true)
+                {
+                    int midLength = Regex.Replace(_paytmPaymentSettings.MerchantId, "[^A-Za-z]", "").Length;
+                    if (midLength==7)
+                    {
+                        ViewData["checkoutJsUrl"] = PaytmPaymentProcessor.PRODUCTION_HOST_PPBL + PaytmPaymentProcessor.CHECKOUT_JS_URL;
+                    }
+                }
+            }
+            if (_paytmPaymentSettings.env == "Stage")
+            {
+                ViewData["checkoutJsUrl"] = PaytmPaymentProcessor.STAGING_HOST + PaytmPaymentProcessor.CHECKOUT_JS_URL;
+            }
             String viewName = "~/Plugins/Payments.Paytm/Views/JSCheckoutView.cshtml";
             return View(viewName);
         }
@@ -214,13 +248,22 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
             paytmPaymentSettings.DcEmi = model.DcEmi;
             if (model.env == "Stage")
             {
-                paytmPaymentSettings.PaymentUrl = "https://securegw-stage.paytm.in/order/process";
-                paytmPaymentSettings.TxnStatusUrl = "https://securegw-stage.paytm.in/order/status";
+                PaytmPaymentSettings.PaymentUrl = PaytmPaymentProcessor.STAGING_HOST + PaytmPaymentProcessor.ORDER_PROCESS_URL;
+                PaytmPaymentSettings.TxnStatusUrl = PaytmPaymentProcessor.STAGING_HOST + PaytmPaymentProcessor.ORDER_STATUS_URL;
             }
             if (model.env == "Prod")
             {
-                paytmPaymentSettings.PaymentUrl = "https://securegw.paytm.in/order/process";
-                paytmPaymentSettings.TxnStatusUrl = "https://securegw.paytm.in/order/status";
+                PaytmPaymentSettings.PaymentUrl = PaytmPaymentProcessor.PRODUCTION_HOST + PaytmPaymentProcessor.ORDER_PROCESS_URL;
+                PaytmPaymentSettings.TxnStatusUrl = PaytmPaymentProcessor.PRODUCTION_HOST + PaytmPaymentProcessor.ORDER_STATUS_URL;
+                if (PaytmPaymentProcessor.PPBL == true)
+                {
+                    int midLength = Regex.Replace(paytmPaymentSettings.MerchantId, "[^A-Za-z]", "").Length;
+                    if(midLength == 7)
+                    {
+                        PaytmPaymentSettings.PaymentUrl = PaytmPaymentProcessor.PRODUCTION_HOST_PPBL + PaytmPaymentProcessor.ORDER_PROCESS_URL;
+                        PaytmPaymentSettings.TxnStatusUrl = PaytmPaymentProcessor.PRODUCTION_HOST_PPBL + PaytmPaymentProcessor.ORDER_STATUS_URL;
+                    }
+                }                
             }
             paytmPaymentSettings.PaymentUrl = model.PaymentUrl;
             paytmPaymentSettings.CallBackUrl = model.CallBackUrl;

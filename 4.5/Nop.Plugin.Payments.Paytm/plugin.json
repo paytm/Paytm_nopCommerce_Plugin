@@ -2,7 +2,7 @@
   "Group": "Payment methods",
   "FriendlyName": "Paytm",
   "SystemName": "Payments.Paytm",
-  "Version": "1.72",
+  "Version": "1.73",
   "SupportedVersions": [ "4.50" ],
   "Author": "Paytm team",
   "DisplayOrder": 0,

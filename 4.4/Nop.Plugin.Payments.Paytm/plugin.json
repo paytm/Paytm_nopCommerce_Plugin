@@ -2,7 +2,7 @@
   "Group": "Payment methods",
   "FriendlyName": "Paytm",
   "SystemName": "Payments.Paytm",
-  "Version": "1.66",
+  "Version": "1.67",
   "SupportedVersions": [ "4.40" ],
   "Author": "nopCommerce team",
   "DisplayOrder": 1,

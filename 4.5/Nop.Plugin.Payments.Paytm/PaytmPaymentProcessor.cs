@@ -54,6 +54,15 @@ namespace Nop.Plugin.Payments.Paytm
         private readonly PaytmHttpClient _paytmHttpClient;
         private readonly PaytmPaymentSettings _paytmPaymentSettings;
 
+        public const string PRODUCTION_HOST = "https://securegw.paytm.in/";
+        public const string PRODUCTION_HOST_PPBL = "https://securepg.paytm.in/";
+        public const bool   PPBL = false;
+        public const string STAGING_HOST = "https://securegw-stage.paytm.in/";
+        public const string CHECKOUT_JS_URL = "merchantpgpui/checkoutjs/merchants/";
+        public const string ORDER_PROCESS_URL = "order/process";
+        public const string ORDER_STATUS_URL = "order/status";
+        public const string INITIATE_TRANSACTION_URL = "theia/api/v1/initiateTransaction";        
+
         #endregion
 
         #region Ctor
@@ -485,12 +494,20 @@ namespace Nop.Plugin.Payments.Paytm
             if (_paytmPaymentSettings.env == "Stage")
             {
                 //For  Staging
-                url = "https://securegw-stage.paytm.in/theia/api/v1/initiateTransaction?mid=" + mid + "&orderId=" + orderid + " ";
+                url = STAGING_HOST + INITIATE_TRANSACTION_URL + "?mid=" + mid + "&orderId=" + orderid + " ";
             }
             if (_paytmPaymentSettings.env == "Prod")
             {
-                //For  Production 
-                url = "https://securegw.paytm.in/theia/api/v1/initiateTransaction?mid=" + mid + "&orderId=" + orderid + "";
+                //For Production
+                url = PRODUCTION_HOST + INITIATE_TRANSACTION_URL + "?mid=" + mid + "&orderId=" + orderid + "";
+                if (PPBL == true)
+                {
+                    int midLength = Regex.Replace(mid, "[^A-Za-z]", "").Length;
+                    if (midLength == 7)
+                    {
+                        url = PRODUCTION_HOST_PPBL + INITIATE_TRANSACTION_URL + "?mid=" + mid + "&orderId=" + orderid + "";
+                    }
+                }
             }
             HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
 

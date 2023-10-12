@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.WebUtilities;
@@ -49,6 +50,15 @@ namespace Nop.Plugin.Payments.Paytm
         private readonly IWebHelper _webHelper;
         private readonly PaytmHttpClient _PaytmHttpClient;
         private readonly PaytmPaymentSettings _PaytmPaymentSettings;
+
+        public const string PRODUCTION_HOST = "https://securegw.paytm.in/";
+        public const string PRODUCTION_HOST_PPBL = "https://securepg.paytm.in/";
+        public const bool   PPBL = false;
+        public const string STAGING_HOST = "https://securegw-stage.paytm.in/";
+        public const string CHECKOUT_JS_URL = "merchantpgpui/checkoutjs/merchants/";
+        public const string ORDER_PROCESS_URL = "order/process";
+        public const string ORDER_STATUS_URL = "order/status";
+        public const string INITIATE_TRANSACTION_URL = "theia/api/v1/initiateTransaction";
 
         #endregion
 
@@ -487,12 +497,20 @@ namespace Nop.Plugin.Payments.Paytm
             if (_PaytmPaymentSettings.env == "Stage")
             {
                 //For  Staging
-                url = "https://securegw-stage.paytm.in/theia/api/v1/initiateTransaction?mid=" + mid + "&orderId=" + orderid + " ";
+                url = STAGING_HOST + INITIATE_TRANSACTION_URL + "?mid=" + mid + "&orderId=" + orderid + " ";
             }
             if (_PaytmPaymentSettings.env == "Prod")
             {
                 //For  Production 
-                url = "https://securegw.paytm.in/theia/api/v1/initiateTransaction?mid=" + mid + "&orderId=" + orderid + "";
+                url = PRODUCTION_HOST + INITIATE_TRANSACTION_URL + "?mid=" + mid + "&orderId=" + orderid + "";
+                if (PPBL == true)
+                {
+                    int midLength = Regex.Replace(mid, "[^A-Za-z]", "").Length;
+                    if (midLength == 7)
+                    {
+                        url = PRODUCTION_HOST_PPBL + INITIATE_TRANSACTION_URL + "?mid=" + mid + "&orderId=" + orderid + "";
+                    }
+                }
             }
             HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
 

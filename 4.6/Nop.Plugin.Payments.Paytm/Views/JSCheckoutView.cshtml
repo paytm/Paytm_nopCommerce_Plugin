@@ -115,29 +115,18 @@
         var amount = data.amount;
         var mid = data.mid;
         var env = data.env;
+        var checkoutJsUrl = data.checkoutJsUrl;
         debugger;
         function getmid() {
             console.log("enter getmid method");
-            if (env == "Stage") {
                 console.log("Stage");
                 var midnew = mid;
                 var my_awesome_script = document.createElement('script');
-                my_awesome_script.setAttribute('src', 'https://securegw-stage.paytm.in/merchantpgpui/checkoutjs/merchants/' + midnew);
+                my_awesome_script.setAttribute('src', checkoutJsUrl + midnew);
                 my_awesome_script.setAttribute('crossorigin', 'anonymous');
                 my_awesome_script.setAttribute('type', 'application/javascript');
                 document.head.appendChild(my_awesome_script);
                 return midnew;
-            }
-            if (env == "Prod") {
-                 console.log("prod");
-                var midnew = mid;
-                var my_awesome_script = document.createElement('script');
-                my_awesome_script.setAttribute('src', 'https://securegw.paytm.in/merchantpgpui/checkoutjs/merchants/' + midnew);
-                my_awesome_script.setAttribute('crossorigin', 'anonymous');
-                my_awesome_script.setAttribute('type', 'application/javascript');
-                document.head.appendChild(my_awesome_script);
-                return midnew;
-            }
 
         }
         getmid();
