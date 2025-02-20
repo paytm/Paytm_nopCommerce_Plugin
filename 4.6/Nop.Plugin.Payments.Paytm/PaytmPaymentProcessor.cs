@@ -28,6 +28,7 @@ using Paytm;
 using System.Net.Http;
 using System.Text;
 using Org.BouncyCastle.Asn1.Ocsp;
+using System.Text.RegularExpressions;
 using Nop.Plugin.Payments.Paytm.Components;
 
 namespace Nop.Plugin.Payments.Paytm
@@ -55,10 +56,10 @@ namespace Nop.Plugin.Payments.Paytm
         private readonly PaytmHttpClient _paytmHttpClient;
         private readonly PaytmPaymentSettings _paytmPaymentSettings;
 
-        public const string PRODUCTION_HOST = "https://securegw.paytm.in/";
+        public const string PRODUCTION_HOST = "https://secure.paytmpayments.com/";
         public const string PRODUCTION_HOST_PPBL = "https://securepg.paytm.in/";
         public const bool   PPBL = false;
-        public const string STAGING_HOST = "https://securegw-stage.paytm.in/";
+        public const string STAGING_HOST = "https://securestage.paytmpayments.com/";
         public const string CHECKOUT_JS_URL = "merchantpgpui/checkoutjs/merchants/";
         public const string ORDER_PROCESS_URL = "order/process";
         public const string ORDER_STATUS_URL = "order/status";

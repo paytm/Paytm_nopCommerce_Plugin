@@ -266,7 +266,7 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
                     }
                 }
             }
-            }
+            
             paytmPaymentSettings.PaymentUrl = model.PaymentUrl;
             paytmPaymentSettings.CallBackUrl = model.CallBackUrl;
             paytmPaymentSettings.TxnStatusUrl = model.TxnStatusUrl;
