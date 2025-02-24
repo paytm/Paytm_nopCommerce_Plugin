@@ -521,7 +521,6 @@
           "lib/netstandard2.0/Azure.Storage.Common.dll": {}
         }
       },
-      "BouncyCastle.NetCore/1.8.5": {},
       "ClosedXML/0.95.4": {
         "dependencies": {
           "DocumentFormat.OpenXml": "2.7.2",
@@ -910,19 +909,15 @@
           "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.dll": {}
         }
       },
-      "Google.Protobuf/3.14.0": {
-        "dependencies": {
-          "System.Memory": "4.5.4",
-          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
-        },
+      "Google.Protobuf/3.19.4": {
         "runtime": {
-          "lib/netstandard2.0/Google.Protobuf.dll": {
-            "assemblyVersion": "3.14.0.0",
-            "fileVersion": "3.14.0.0"
+          "lib/net5.0/Google.Protobuf.dll": {
+            "assemblyVersion": "3.19.4.0",
+            "fileVersion": "3.19.4.0"
           }
         },
         "compile": {
-          "lib/netstandard2.0/Google.Protobuf.dll": {}
+          "lib/net5.0/Google.Protobuf.dll": {}
         }
       },
       "Humanizer/2.13.14": {
@@ -1470,7 +1465,7 @@
       },
       "iTextSharp.LGPLv2.Core/1.7.0": {
         "dependencies": {
-          "Portable.BouncyCastle": "1.8.10",
+          "Portable.BouncyCastle": "1.9.0",
           "System.Collections.NonGeneric": "4.3.0",
           "System.Drawing.Common": "5.0.0",
           "System.Net.Requests": "4.3.0",
@@ -1924,22 +1919,22 @@
           "runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.dll": {
             "rid": "win-arm",
             "assetType": "native",
-            "fileVersion": "4.0.0.0"
+            "fileVersion": "0.0.0.0"
           },
           "runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll": {
             "rid": "win-arm64",
             "assetType": "native",
-            "fileVersion": "4.0.0.0"
+            "fileVersion": "0.0.0.0"
           },
           "runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "4.0.0.0"
+            "fileVersion": "0.0.0.0"
           },
           "runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll": {
             "rid": "win-x86",
             "assetType": "native",
-            "fileVersion": "4.0.0.0"
+            "fileVersion": "0.0.0.0"
           }
         }
       },
@@ -2201,7 +2196,7 @@
       },
       "MimeKit/2.15.0": {
         "dependencies": {
-          "Portable.BouncyCastle": "1.8.10",
+          "Portable.BouncyCastle": "1.9.0",
           "System.Buffers": "4.5.1",
           "System.Reflection.TypeExtensions": "4.7.0",
           "System.Security.Cryptography.Pkcs": "5.0.0",
@@ -2270,11 +2265,11 @@
           "lib/netstandard2.0/MiniProfiler.Shared.dll": {}
         }
       },
-      "MySql.Data/8.0.27": {
+      "MySql.Data/8.0.31": {
         "dependencies": {
-          "BouncyCastle.NetCore": "1.8.5",
-          "Google.Protobuf": "3.14.0",
+          "Google.Protobuf": "3.19.4",
           "K4os.Compression.LZ4.Streams": "1.2.6",
+          "Portable.BouncyCastle": "1.9.0",
           "System.Buffers": "4.5.1",
           "System.Configuration.ConfigurationManager": "5.0.0",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0",
@@ -2282,23 +2277,18 @@
           "System.Text.Encoding.CodePages": "5.0.0"
         },
         "runtime": {
-          "lib/net5.0/MySql.Data.dll": {
-            "assemblyVersion": "8.0.27.0",
-            "fileVersion": "8.0.27.0"
+          "lib/net6.0/MySql.Data.dll": {
+            "assemblyVersion": "8.0.31.0",
+            "fileVersion": "8.0.31.0"
           },
-          "lib/net5.0/Ubiety.Dns.Core.dll": {
-            "assemblyVersion": "2.2.1.0",
-            "fileVersion": "2.2.1.0"
-          },
-          "lib/net5.0/ZstdNet.dll": {
+          "lib/net6.0/ZstdNet.dll": {
             "assemblyVersion": "1.4.5.0",
             "fileVersion": "1.4.5.0"
           }
         },
         "compile": {
-          "lib/net5.0/MySql.Data.dll": {},
-          "lib/net5.0/Ubiety.Dns.Core.dll": {},
-          "lib/net5.0/ZstdNet.dll": {}
+          "lib/net6.0/MySql.Data.dll": {},
+          "lib/net6.0/ZstdNet.dll": {}
         }
       },
       "NETStandard.Library/1.6.1": {
@@ -2467,11 +2457,11 @@
           "lib/net5.0/Pipelines.Sockets.Unofficial.dll": {}
         }
       },
-      "Portable.BouncyCastle/1.8.10": {
+      "Portable.BouncyCastle/1.9.0": {
         "runtime": {
           "lib/netstandard2.0/BouncyCastle.Crypto.dll": {
-            "assemblyVersion": "1.8.10.0",
-            "fileVersion": "1.8.10.1"
+            "assemblyVersion": "1.9.0.0",
+            "fileVersion": "1.9.0.1"
           }
         },
         "compile": {
@@ -3866,7 +3856,7 @@
           "FluentMigrator": "3.3.1",
           "FluentMigrator.Runner": "3.3.1",
           "Microsoft.Data.SqlClient": "4.0.0",
-          "MySql.Data": "8.0.27",
+          "MySql.Data": "8.0.31",
           "Nop.Core": "4.5.0",
           "Npgsql": "6.0.1",
           "System.Net.NameResolution": "4.3.0",
@@ -5748,13 +5738,6 @@
       "path": "azure.storage.common/12.9.0",
       "hashPath": "azure.storage.common.12.9.0.nupkg.sha512"
     },
-    "BouncyCastle.NetCore/1.8.5": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-6uxsQw2UXrt82VQAWC2td3oBSJjUZ3P4u4DliagB8wf67KsU53V8sW9xwdF+IwZOOZFR0TCZuv/YKZ2BlrfAag==",
-      "path": "bouncycastle.netcore/1.8.5",
-      "hashPath": "bouncycastle.netcore.1.8.5.nupkg.sha512"
-    },
     "ClosedXML/0.95.4": {
       "type": "package",
       "serviceable": true,
@@ -5930,12 +5913,12 @@
       "path": "fluentvalidation.dependencyinjectionextensions/10.3.6",
       "hashPath": "fluentvalidation.dependencyinjectionextensions.10.3.6.nupkg.sha512"
     },
-    "Google.Protobuf/3.14.0": {
+    "Google.Protobuf/3.19.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-9AkodyGNmLI+wJJPbwpWLmh4BMHoXDQ9+8qvDPhQQi/BNsleqKMBn3OlyLwC6CALwan2kc5+Cenb8fJSITX3nQ==",
-      "path": "google.protobuf/3.14.0",
-      "hashPath": "google.protobuf.3.14.0.nupkg.sha512"
+      "sha512": "sha512-fd07/ykL4O4FhqrZIELm5lmiyOHfdPg9+o+hWr6tcfRdS7tHXnImg/2wtogLzlW2eEmr0J7j6ZrZvaWOLiJbxQ==",
+      "path": "google.protobuf/3.19.4",
+      "hashPath": "google.protobuf.3.19.4.nupkg.sha512"
     },
     "Humanizer/2.13.14": {
       "type": "package",
@@ -6714,12 +6697,12 @@
       "path": "miniprofiler.shared/4.2.22",
       "hashPath": "miniprofiler.shared.4.2.22.nupkg.sha512"
     },
-    "MySql.Data/8.0.27": {
+    "MySql.Data/8.0.31": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Ef+sH12/nGAiF9yLZFkuXh7vtVvEPiLKyZNJiDk+VBULzLcXj0lmfU7qcmWNCSVX5n6zu5jMV+JaNf1C+a+T8g==",
-      "path": "mysql.data/8.0.27",
-      "hashPath": "mysql.data.8.0.27.nupkg.sha512"
+      "sha512": "sha512-ZVcctmag6cX0DtDxWh3fhBlSdZfGHKIUIodl7QtjZKupSgbCT0X+bO1Faw/NfUR2VfoxB/L9WzLfeCvki65qVg==",
+      "path": "mysql.data/8.0.31",
+      "hashPath": "mysql.data.8.0.31.nupkg.sha512"
     },
     "NETStandard.Library/1.6.1": {
       "type": "package",
@@ -6791,12 +6774,12 @@
       "path": "pipelines.sockets.unofficial/2.2.0",
       "hashPath": "pipelines.sockets.unofficial.2.2.0.nupkg.sha512"
     },
-    "Portable.BouncyCastle/1.8.10": {
+    "Portable.BouncyCastle/1.9.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-XLhjNAwuVB9ynwn11l5K44eyozh8q6gFseTrlnLNttejimglX7+F9+vxh60LPjvA/DAt6fUdS43N3ah8K6eaWg==",
-      "path": "portable.bouncycastle/1.8.10",
-      "hashPath": "portable.bouncycastle.1.8.10.nupkg.sha512"
+      "sha512": "sha512-eZZBCABzVOek+id9Xy04HhmgykF0wZg9wpByzrWN7q8qEI0Qen9b7tfd7w8VA3dOeesumMG7C5ZPy0jk7PSRHw==",
+      "path": "portable.bouncycastle/1.9.0",
+      "hashPath": "portable.bouncycastle.1.9.0.nupkg.sha512"
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {
       "type": "package",

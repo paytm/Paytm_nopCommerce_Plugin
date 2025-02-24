@@ -211,19 +211,6 @@
           }
         }
       },
-      "BouncyCastle.NetCore/1.8.5": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/BouncyCastle.Crypto.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/BouncyCastle.Crypto.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "ClosedXML/0.95.4": {
         "type": "package",
         "dependencies": {
@@ -665,19 +652,15 @@
           }
         }
       },
-      "Google.Protobuf/3.14.0": {
+      "Google.Protobuf/3.19.4": {
         "type": "package",
-        "dependencies": {
-          "System.Memory": "4.5.3",
-          "System.Runtime.CompilerServices.Unsafe": "4.5.2"
-        },
         "compile": {
-          "lib/netstandard2.0/Google.Protobuf.dll": {
+          "lib/net5.0/Google.Protobuf.dll": {
             "related": ".pdb;.xml"
           }
         },
         "runtime": {
-          "lib/netstandard2.0/Google.Protobuf.dll": {
+          "lib/net5.0/Google.Protobuf.dll": {
             "related": ".pdb;.xml"
           }
         }
@@ -2414,12 +2397,12 @@
           }
         }
       },
-      "MySql.Data/8.0.27": {
+      "MySql.Data/8.0.31": {
         "type": "package",
         "dependencies": {
-          "BouncyCastle.NetCore": "1.8.5",
-          "Google.Protobuf": "3.14.0",
+          "Google.Protobuf": "3.19.4",
           "K4os.Compression.LZ4.Streams": "1.2.6",
+          "Portable.BouncyCastle": "1.9.0",
           "System.Buffers": "4.5.1",
           "System.Configuration.ConfigurationManager": "4.4.1",
           "System.Runtime.CompilerServices.Unsafe": "5.0.0",
@@ -2427,18 +2410,16 @@
           "System.Text.Encoding.CodePages": "4.4.0"
         },
         "compile": {
-          "lib/net5.0/MySql.Data.dll": {
+          "lib/net6.0/MySql.Data.dll": {
             "related": ".xml"
           },
-          "lib/net5.0/Ubiety.Dns.Core.dll": {},
-          "lib/net5.0/ZstdNet.dll": {}
+          "lib/net6.0/ZstdNet.dll": {}
         },
         "runtime": {
-          "lib/net5.0/MySql.Data.dll": {
+          "lib/net6.0/MySql.Data.dll": {
             "related": ".xml"
           },
-          "lib/net5.0/Ubiety.Dns.Core.dll": {},
-          "lib/net5.0/ZstdNet.dll": {}
+          "lib/net6.0/ZstdNet.dll": {}
         }
       },
       "NETStandard.Library/1.6.1": {
@@ -2626,7 +2607,7 @@
           }
         }
       },
-      "Portable.BouncyCastle/1.8.10": {
+      "Portable.BouncyCastle/1.9.0": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/BouncyCastle.Crypto.dll": {
@@ -5131,7 +5112,7 @@
           "FluentMigrator": "3.3.1",
           "FluentMigrator.Runner": "3.3.1",
           "Microsoft.Data.SqlClient": "4.0.0",
-          "MySql.Data": "8.0.27",
+          "MySql.Data": "8.0.31",
           "Nop.Core": "4.5.0",
           "Npgsql": "6.0.1",
           "System.Net.NameResolution": "4.3.0",
@@ -5395,31 +5376,6 @@
         "lib/netstandard2.0/Azure.Storage.Common.dll",
         "lib/netstandard2.0/Azure.Storage.Common.xml",
         "pkgicon.png"
-      ]
-    },
-    "BouncyCastle.NetCore/1.8.5": {
-      "sha512": "6uxsQw2UXrt82VQAWC2td3oBSJjUZ3P4u4DliagB8wf67KsU53V8sW9xwdF+IwZOOZFR0TCZuv/YKZ2BlrfAag==",
-      "type": "package",
-      "path": "bouncycastle.netcore/1.8.5",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "bouncycastle.netcore.1.8.5.nupkg.sha512",
-        "bouncycastle.netcore.nuspec",
-        "lib/Mono/BouncyCastle.Crypto.dll",
-        "lib/Mono/BouncyCastle.Crypto.xml",
-        "lib/MonoAndroid/BouncyCastle.Crypto.dll",
-        "lib/MonoAndroid/BouncyCastle.Crypto.xml",
-        "lib/MonoMac/BouncyCastle.Crypto.dll",
-        "lib/MonoMac/BouncyCastle.Crypto.xml",
-        "lib/MonoTouch/BouncyCastle.Crypto.dll",
-        "lib/MonoTouch/BouncyCastle.Crypto.xml",
-        "lib/net20/BouncyCastle.Crypto.dll",
-        "lib/net20/BouncyCastle.Crypto.xml",
-        "lib/netstandard2.0/BouncyCastle.Crypto.dll",
-        "lib/netstandard2.0/BouncyCastle.Crypto.xml",
-        "lib/xamarinios/BouncyCastle.Crypto.dll",
-        "lib/xamarinios/BouncyCastle.Crypto.xml"
       ]
     },
     "ClosedXML/0.95.4": {
@@ -5881,18 +5837,21 @@
         "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.xml"
       ]
     },
-    "Google.Protobuf/3.14.0": {
-      "sha512": "9AkodyGNmLI+wJJPbwpWLmh4BMHoXDQ9+8qvDPhQQi/BNsleqKMBn3OlyLwC6CALwan2kc5+Cenb8fJSITX3nQ==",
+    "Google.Protobuf/3.19.4": {
+      "sha512": "fd07/ykL4O4FhqrZIELm5lmiyOHfdPg9+o+hWr6tcfRdS7tHXnImg/2wtogLzlW2eEmr0J7j6ZrZvaWOLiJbxQ==",
       "type": "package",
-      "path": "google.protobuf/3.14.0",
+      "path": "google.protobuf/3.19.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "google.protobuf.3.14.0.nupkg.sha512",
+        "google.protobuf.3.19.4.nupkg.sha512",
         "google.protobuf.nuspec",
         "lib/net45/Google.Protobuf.dll",
         "lib/net45/Google.Protobuf.pdb",
         "lib/net45/Google.Protobuf.xml",
+        "lib/net5.0/Google.Protobuf.dll",
+        "lib/net5.0/Google.Protobuf.pdb",
+        "lib/net5.0/Google.Protobuf.xml",
         "lib/netstandard1.1/Google.Protobuf.dll",
         "lib/netstandard1.1/Google.Protobuf.pdb",
         "lib/netstandard1.1/Google.Protobuf.xml",
@@ -8038,34 +7997,35 @@
         "miniprofiler.shared.nuspec"
       ]
     },
-    "MySql.Data/8.0.27": {
-      "sha512": "Ef+sH12/nGAiF9yLZFkuXh7vtVvEPiLKyZNJiDk+VBULzLcXj0lmfU7qcmWNCSVX5n6zu5jMV+JaNf1C+a+T8g==",
+    "MySql.Data/8.0.31": {
+      "sha512": "ZVcctmag6cX0DtDxWh3fhBlSdZfGHKIUIodl7QtjZKupSgbCT0X+bO1Faw/NfUR2VfoxB/L9WzLfeCvki65qVg==",
       "type": "package",
-      "path": "mysql.data/8.0.27",
+      "path": "mysql.data/8.0.31",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/net452/MySql.Data.dll",
         "lib/net452/MySql.Data.xml",
-        "lib/net452/Ubiety.Dns.Core.dll",
         "lib/net452/ZstdNet.dll",
         "lib/net48/MySql.Data.dll",
         "lib/net48/MySql.Data.xml",
-        "lib/net48/Ubiety.Dns.Core.dll",
         "lib/net48/ZstdNet.dll",
         "lib/net5.0/MySql.Data.dll",
         "lib/net5.0/MySql.Data.xml",
-        "lib/net5.0/Ubiety.Dns.Core.dll",
         "lib/net5.0/ZstdNet.dll",
+        "lib/net6.0/MySql.Data.dll",
+        "lib/net6.0/MySql.Data.xml",
+        "lib/net6.0/ZstdNet.dll",
+        "lib/net7.0/MySql.Data.dll",
+        "lib/net7.0/MySql.Data.xml",
+        "lib/net7.0/ZstdNet.dll",
         "lib/netstandard2.0/MySql.Data.dll",
         "lib/netstandard2.0/MySql.Data.xml",
-        "lib/netstandard2.0/Ubiety.Dns.Core.dll",
         "lib/netstandard2.0/ZstdNet.dll",
         "lib/netstandard2.1/MySql.Data.dll",
         "lib/netstandard2.1/MySql.Data.xml",
-        "lib/netstandard2.1/Ubiety.Dns.Core.dll",
         "lib/netstandard2.1/ZstdNet.dll",
-        "mysql.data.8.0.27.nupkg.sha512",
+        "mysql.data.8.0.31.nupkg.sha512",
         "mysql.data.nuspec"
       ]
     },
@@ -8272,10 +8232,10 @@
         "pipelines.sockets.unofficial.nuspec"
       ]
     },
-    "Portable.BouncyCastle/1.8.10": {
-      "sha512": "XLhjNAwuVB9ynwn11l5K44eyozh8q6gFseTrlnLNttejimglX7+F9+vxh60LPjvA/DAt6fUdS43N3ah8K6eaWg==",
+    "Portable.BouncyCastle/1.9.0": {
+      "sha512": "eZZBCABzVOek+id9Xy04HhmgykF0wZg9wpByzrWN7q8qEI0Qen9b7tfd7w8VA3dOeesumMG7C5ZPy0jk7PSRHw==",
       "type": "package",
-      "path": "portable.bouncycastle/1.8.10",
+      "path": "portable.bouncycastle/1.9.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -8283,7 +8243,7 @@
         "lib/net40/BouncyCastle.Crypto.xml",
         "lib/netstandard2.0/BouncyCastle.Crypto.dll",
         "lib/netstandard2.0/BouncyCastle.Crypto.xml",
-        "portable.bouncycastle.1.8.10.nupkg.sha512",
+        "portable.bouncycastle.1.9.0.nupkg.sha512",
         "portable.bouncycastle.nuspec"
       ]
     },
@@ -14161,34 +14121,32 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\shubham.dahibhate\\.nuget\\packages\\": {}
+    "/Users/chandrashekhargarsari/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\shubham.dahibhate\\Downloads\\nopCommerce_4.50.2_Source\\src\\Plugins\\Nop.Plugin.Payments.Paytm\\Nop.Plugin.Payments.Paytm.csproj",
+      "projectUniqueName": "/Users/chandrashekhargarsari/Sites/nopcommerce/4.5/src/Plugins/Nop.Plugin.Payments.Paytm/Nop.Plugin.Payments.Paytm.csproj",
       "projectName": "Nop.Plugin.Payments.Paytm",
-      "projectPath": "C:\\Users\\shubham.dahibhate\\Downloads\\nopCommerce_4.50.2_Source\\src\\Plugins\\Nop.Plugin.Payments.Paytm\\Nop.Plugin.Payments.Paytm.csproj",
-      "packagesPath": "C:\\Users\\shubham.dahibhate\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\shubham.dahibhate\\Downloads\\nopCommerce_4.50.2_Source\\src\\Plugins\\Nop.Plugin.Payments.Paytm\\obj\\",
+      "projectPath": "/Users/chandrashekhargarsari/Sites/nopcommerce/4.5/src/Plugins/Nop.Plugin.Payments.Paytm/Nop.Plugin.Payments.Paytm.csproj",
+      "packagesPath": "/Users/chandrashekhargarsari/.nuget/packages/",
+      "outputPath": "/Users/chandrashekhargarsari/Sites/nopcommerce/4.5/src/Plugins/Nop.Plugin.Payments.Paytm/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\shubham.dahibhate\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/chandrashekhargarsari/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\shubham.dahibhate\\Downloads\\nopCommerce_4.50.2_Source\\src\\Presentation\\Nop.Web.Framework\\Nop.Web.Framework.csproj": {
-              "projectPath": "C:\\Users\\shubham.dahibhate\\Downloads\\nopCommerce_4.50.2_Source\\src\\Presentation\\Nop.Web.Framework\\Nop.Web.Framework.csproj"
+            "/Users/chandrashekhargarsari/Sites/nopcommerce/4.5/src/Presentation/Nop.Web.Framework/Nop.Web.Framework.csproj": {
+              "projectPath": "/Users/chandrashekhargarsari/Sites/nopcommerce/4.5/src/Presentation/Nop.Web.Framework/Nop.Web.Framework.csproj"
             }
           }
         }
@@ -14218,7 +14176,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.428/RuntimeIdentifierGraph.json"
       }
     }
   }

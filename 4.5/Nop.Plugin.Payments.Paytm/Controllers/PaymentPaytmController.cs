@@ -248,20 +248,20 @@ namespace Nop.Plugin.Payments.Paytm.Controllers
             paytmPaymentSettings.DcEmi = model.DcEmi;
             if (model.env == "Stage")
             {
-                PaytmPaymentSettings.PaymentUrl = PaytmPaymentProcessor.STAGING_HOST + PaytmPaymentProcessor.ORDER_PROCESS_URL;
-                PaytmPaymentSettings.TxnStatusUrl = PaytmPaymentProcessor.STAGING_HOST + PaytmPaymentProcessor.ORDER_STATUS_URL;
+                paytmPaymentSettings.PaymentUrl = PaytmPaymentProcessor.STAGING_HOST + PaytmPaymentProcessor.ORDER_PROCESS_URL;
+                paytmPaymentSettings.TxnStatusUrl = PaytmPaymentProcessor.STAGING_HOST + PaytmPaymentProcessor.ORDER_STATUS_URL;
             }
             if (model.env == "Prod")
             {
-                PaytmPaymentSettings.PaymentUrl = PaytmPaymentProcessor.PRODUCTION_HOST + PaytmPaymentProcessor.ORDER_PROCESS_URL;
-                PaytmPaymentSettings.TxnStatusUrl = PaytmPaymentProcessor.PRODUCTION_HOST + PaytmPaymentProcessor.ORDER_STATUS_URL;
+                paytmPaymentSettings.PaymentUrl = PaytmPaymentProcessor.PRODUCTION_HOST + PaytmPaymentProcessor.ORDER_PROCESS_URL;
+                paytmPaymentSettings.TxnStatusUrl = PaytmPaymentProcessor.PRODUCTION_HOST + PaytmPaymentProcessor.ORDER_STATUS_URL;
                 if (PaytmPaymentProcessor.PPBL == true)
                 {
                     int midLength = Regex.Replace(paytmPaymentSettings.MerchantId, "[^A-Za-z]", "").Length;
                     if(midLength == 7)
                     {
-                        PaytmPaymentSettings.PaymentUrl = PaytmPaymentProcessor.PRODUCTION_HOST_PPBL + PaytmPaymentProcessor.ORDER_PROCESS_URL;
-                        PaytmPaymentSettings.TxnStatusUrl = PaytmPaymentProcessor.PRODUCTION_HOST_PPBL + PaytmPaymentProcessor.ORDER_STATUS_URL;
+                        paytmPaymentSettings.PaymentUrl = PaytmPaymentProcessor.PRODUCTION_HOST_PPBL + PaytmPaymentProcessor.ORDER_PROCESS_URL;
+                        paytmPaymentSettings.TxnStatusUrl = PaytmPaymentProcessor.PRODUCTION_HOST_PPBL + PaytmPaymentProcessor.ORDER_STATUS_URL;
                     }
                 }                
             }

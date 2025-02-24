@@ -5,7 +5,7 @@
   "Version": "1.73",
   "SupportedVersions": [ "4.50" ],
   "Author": "Paytm team",
-  "DisplayOrder": 0,
+  "DisplayOrder": 1,
   "FileName": "Nop.Plugin.Payments.Paytm.dll",
   "Description": "This plugin allows paying with Paytm"
 }
