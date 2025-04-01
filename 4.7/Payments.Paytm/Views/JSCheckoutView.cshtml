@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+    <title>Paytm JS Checkout - .net</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+
+    <!-- <script type="application/javascript" crossorigin="anonymous" src="https://securestage.paytmpayments.com/merchantpgpui/checkoutjs/merchants/INTEGR48430372304363.js"></script> -->
+</head>
+<style>
+
+#paytm-pg-spinner {
+    width: 70px;
+    text-align: center;
+    z-index: 999999;
+    position: fixed;
+    top: 25%;
+    left: 50%;
+}
+
+#paytm-pg-spinner>div {
+    width: 10px;
+    height: 10px;
+    background-color: #012b71;
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+#paytm-pg-spinner .bounce1 {
+    -webkit-animation-delay: -0.64s;
+    animation-delay: -0.64s;
+}
+
+#paytm-pg-spinner .bounce2 {
+    -webkit-animation-delay: -0.48s;
+    animation-delay: -0.48s;
+}
+
+#paytm-pg-spinner .bounce3 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+}
+
+#paytm-pg-spinner .bounce4 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+}
+
+#paytm-pg-spinner .bounce4,
+#paytm-pg-spinner .bounce5 {
+    background-color: #48baf5;
+}
+
+@@-webkit-keyframes sk-bouncedelay {
+    0%,
+    80%,
+    100% {
+        -webkit-transform: scale(0)
+    }
+    40% {
+        -webkit-transform: scale(1.0)
+    }
+}
+
+@@keyframes sk-bouncedelay {
+    0%,
+    80%,
+    100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    40% {
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
+    }
+}
+
+.paytm-overlay {
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    opacity: .3;
+    height: 100%;
+    background: #000;
+    z-index: 9999;
+}
+
+.paytm-woopg-loader p {
+    font-size: 10px !important;
+}
+
+.paytm-woopg-loader a {
+    font-size: 15px !important;
+}
+</style>
+<body>
+    <div>
+
+    </div>
+    <div class="container text-center">
+        <div id="paytm-pg-spinner" class="paytm-woopg-loader"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div><div class="bounce4"></div><div class="bounce5"></div><p class="loading-paytm">Loading Paytm...</p></div><div class="paytm-overlay paytm-woopg-loader"></div>
+    </div>
+    <!script>
+        var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewData));
+
+        var orderId = data.OrderId;
+        var txnToken = data.txntoken;
+        var amount = data.amount;
+        var mid = data.mid;
+        var env = data.env;
+        var checkoutJsUrl = data.checkoutJsUrl;
+        debugger;
+        function getmid() {
+            console.log("enter getmid method");
+                console.log("Stage");
+                var midnew = mid;
+                var my_awesome_script = document.createElement('script');
+                my_awesome_script.setAttribute('src', checkoutJsUrl + midnew);
+                my_awesome_script.setAttribute('crossorigin', 'anonymous');
+                my_awesome_script.setAttribute('type', 'application/javascript');
+                document.head.appendChild(my_awesome_script);
+                return midnew;
+
+        }
+        getmid();
+        window.addEventListener('load', function() {
+					setTimeout(()=>{openBlinkCheckoutPopup(orderId, txnToken, amount)}, 4000);
+				});
+        function openBlinkCheckoutPopup(orderId, txnToken, amount) {
+            console.log("openBlinkCheckoutPopup called");
+    document.getElementById('paytm-pg-spinner').setAttribute("style", "display:none");
+            var config = {
+                "root": "",
+                "flow": "DEFAULT",
+                "data": {
+                    "orderId": orderId,
+                    "token": txnToken,
+                    "tokenType": "TXN_TOKEN",
+                    "amount": amount
+                },
+                "integration": {
+                    "platform": "Nop Commerce",
+                    "version": "4.60|1.0"
+                },
+                "handler": {
+                    "notifyMerchant": function (eventName, data) {
+    document.getElementById('paytm-pg-spinner').setAttribute("style", "display:block");
+                        window.location.href = "/cart";
+                    }
+                }
+            };
+            if (window.Paytm && window.Paytm.CheckoutJS) {
+                // initialze configuration using init method
+                window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
+                    // after successfully updating configuration, invoke checkoutjs
+                    window.Paytm.CheckoutJS.invoke();
+
+                }).catch(function onError(error) {
+                    console.log("error => ", error);
+                });
+            }
+        }
+    </!script>
+</body>
+</html>
